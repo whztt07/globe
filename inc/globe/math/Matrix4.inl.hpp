@@ -209,7 +209,7 @@ inline Matrix4 Matrix4::createProjection (float fovDegrees, float aspect, float 
 inline Matrix4 Matrix4::createLookAt (const Vector3& vecEye, const Vector3& vecTarget, const Vector3& vecUp)
 {
   Matrix4 mtx;
-  mtx.createLookAt(vecEye, vecTarget, vecUp);
+  mtx.makeLookAt(vecEye, vecTarget, vecUp);
   return mtx;
 }
 
@@ -217,6 +217,6 @@ inline Matrix4 Matrix4::createLookAt (const Vector3& vecEye, const Vector3& vecT
 inline Matrix4 Matrix4::createLookAt (const Vector3& vecEye, const Vector3& vecTarget, float roll)
 {
   Matrix4 mtx;
-  mtx.createLookAt(vecEye, vecTarget, roll);
+  mtx.makeLookAt(vecEye, vecTarget, roll);
   return mtx;
 }

@@ -27,6 +27,11 @@
 #else
 # define GLB_EXPORT
 #endif
+//
+#if defined(GLB_COMPILER_MSVC) && (defined(GLB_DLL_BUILD) || defined(GLB_DLL_CLIENT_BUILD))
+# pragma warning(disable : 4251) // non dll-interface class used as base for dll-interface class
+# pragma warning(disable : 4275) // exported class X derivate from a non exported class Y
+#endif
 
 // use this to make your code uncompilable until you remove it
 #define GLB_TODO  const char TODO[-1] = "This is a TODO !"

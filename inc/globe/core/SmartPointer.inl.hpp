@@ -131,7 +131,7 @@ inline T** SmartPointer<T>::operator& (void)
 template <class T>
 inline const T** SmartPointer<T>::operator& (void) const
 {
-  return &m_pSmartObject;
+  return (const T**)&m_pSmartObject;
 }
 
 //---------------------------------------------------------------------------
