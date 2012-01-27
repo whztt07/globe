@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DllDebug|Win32">
+      <Configuration>DllDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DllRelease|Win32">
+      <Configuration>DllRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="LibDebug|Win32">
+      <Configuration>LibDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="LibRelease|Win32">
+      <Configuration>LibRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inc\globe\core\ConfigFileRo.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\ConfigFileRo.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\DateTime.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\DateTime.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Exception.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Exception.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\ExceptionCode.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\ExceptionCodes.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\File.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\File.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileDisk.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileDisk.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileIterator.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileIterator.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileMem.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileMem.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\FileSystem.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Logger.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Logger.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\NonCopyable.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Singleton.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\SmartPointer.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\SmartPointer.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\StlHelpers.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\StlHelpers.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\StringA.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\StringA.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\System.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\System.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Timer.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Animation.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Animation.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Drawable.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Effect.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Effect.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Mesh.hpp" />
+    <ClInclude Include="..\..\inc\globe\engine\Mesh.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\globe.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Color4.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Color4.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Math.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Math.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Matrix4.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Matrix4.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Quaternion.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Quaternion.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Vector2.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Vector2.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Vector3.hpp" />
+    <ClInclude Include="..\..\inc\globe\math\Vector3.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\CubeTexture.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\CubeTexture.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Font.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Font.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\IndexBuffer.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\IndexBuffer.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Renderer.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Renderer.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Surface.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Surface.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Texture.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\Texture.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\VertexBuffer.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\VertexBuffer.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\VertexDeclaration.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\VertexDeclaration.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\VolumeTexture.hpp" />
+    <ClInclude Include="..\..\inc\globe\renderer\VolumeTexture.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneCamera.hpp" />
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneCamera.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneNode.hpp" />
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneNode.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\setup\macros.hpp" />
+    <ClInclude Include="..\..\inc\globe\setup\platform.hpp" />
+    <ClInclude Include="..\..\inc\globe\setup\types.hpp" />
+    <ClInclude Include="..\..\inc\globe\vfs\Archive.hpp" />
+    <ClInclude Include="..\..\inc\globe\vfs\Archive.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\vfs\VFS.hpp" />
+    <ClInclude Include="..\..\inc\globe\vfs\VFS.inl.hpp" />
+    <ClInclude Include="..\..\src\minizip\crypt.h" />
+    <ClInclude Include="..\..\src\minizip\ioapi.h" />
+    <ClInclude Include="..\..\src\minizip\unzip.h" />
+    <ClInclude Include="..\..\src\minizip\zip.h" />
+    <ClInclude Include="..\..\src\tinymt\inttypes.h" />
+    <ClInclude Include="..\..\src\tinymt\stdint.h" />
+    <ClInclude Include="..\..\src\tinymt\tinymt32.hpp" />
+    <ClInclude Include="..\..\src\tinymt\tinymt64.hpp" />
+    <ClInclude Include="..\..\src\zlib\crc32.h" />
+    <ClInclude Include="..\..\src\zlib\deflate.h" />
+    <ClInclude Include="..\..\src\zlib\inffast.h" />
+    <ClInclude Include="..\..\src\zlib\inffixed.h" />
+    <ClInclude Include="..\..\src\zlib\inflate.h" />
+    <ClInclude Include="..\..\src\zlib\inftrees.h" />
+    <ClInclude Include="..\..\src\zlib\trees.h" />
+    <ClInclude Include="..\..\src\zlib\zconf.h" />
+    <ClInclude Include="..\..\src\zlib\zlib.h" />
+    <ClInclude Include="..\..\src\zlib\zutil.h" />
+    <ClInclude Include="..\..\src\_internal.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Animation.cpp" />
+    <ClCompile Include="..\..\src\Archive.cpp" />
+    <ClCompile Include="..\..\src\Color4.cpp" />
+    <ClCompile Include="..\..\src\ConfigFileRo.cpp" />
+    <ClCompile Include="..\..\src\CubeTexture.cpp" />
+    <ClCompile Include="..\..\src\DateTime.cpp" />
+    <ClCompile Include="..\..\src\Effect.cpp" />
+    <ClCompile Include="..\..\src\Exception.cpp" />
+    <ClCompile Include="..\..\src\File.cpp" />
+    <ClCompile Include="..\..\src\FileDisk.cpp" />
+    <ClCompile Include="..\..\src\FileIterator.cpp" />
+    <ClCompile Include="..\..\src\FileMem.cpp" />
+    <ClCompile Include="..\..\src\FileSystem.cpp" />
+    <ClCompile Include="..\..\src\Font.cpp" />
+    <ClCompile Include="..\..\src\IndexBuffer.cpp" />
+    <ClCompile Include="..\..\src\Logger.cpp" />
+    <ClCompile Include="..\..\src\Math.cpp" />
+    <ClCompile Include="..\..\src\Matrix4.cpp" />
+    <ClCompile Include="..\..\src\Mesh.cpp" />
+    <ClCompile Include="..\..\src\minizip\ioapi.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\minizip\unzip.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\minizip\zip.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Quaternion.cpp" />
+    <ClCompile Include="..\..\src\Renderer.cpp" />
+    <ClCompile Include="..\..\src\SceneCamera.cpp" />
+    <ClCompile Include="..\..\src\SceneNode.cpp" />
+    <ClCompile Include="..\..\src\StringA.cpp" />
+    <ClCompile Include="..\..\src\Surface.cpp" />
+    <ClCompile Include="..\..\src\System.cpp" />
+    <ClCompile Include="..\..\src\Texture.cpp" />
+    <ClCompile Include="..\..\src\Timer.cpp" />
+    <ClCompile Include="..\..\src\tinymt\tinymt32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tinymt\tinymt64.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Vector2.cpp" />
+    <ClCompile Include="..\..\src\Vector3.cpp" />
+    <ClCompile Include="..\..\src\VertexBuffer.cpp" />
+    <ClCompile Include="..\..\src\VFS.cpp" />
+    <ClCompile Include="..\..\src\VolumeTexture.cpp" />
+    <ClCompile Include="..\..\src\zlib\adler32.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\compress.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\crc32.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\deflate.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\infback.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\inffast.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\inflate.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\inftrees.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\trees.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\uncompr.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\zutil.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\_internal.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{733B860D-21D5-4E1D-B253-0194596F98A5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Globe</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">
+    <TargetName>globed</TargetName>
+    <IncludePath>$(SolutionDir)\..\..\inc;$(DXSDK_DIR)\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">
+    <TargetName>globed</TargetName>
+    <IncludePath>$(SolutionDir)\..\..\inc;$(DXSDK_DIR)\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">
+    <IncludePath>$(SolutionDir)\..\..\inc;$(DXSDK_DIR)\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">
+    <IncludePath>$(SolutionDir)\..\..\inc;$(DXSDK_DIR)\Include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">
+    <LibraryPath>$(DXSDK_DIR)\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <TargetName>globe</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">
+    <LibraryPath>$(DXSDK_DIR)\Lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <TargetName>globe</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='LibDebug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreSpecificDefaultLibraries>libcp.lib</IgnoreSpecificDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreSpecificDefaultLibraries>libcp.lib</IgnoreSpecificDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

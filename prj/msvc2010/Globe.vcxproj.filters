@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dep">
+      <UniqueIdentifier>{ceeb5399-dd41-40b2-8a81-601d89086f1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe">
+      <UniqueIdentifier>{061c99cf-8aaa-4a6d-b26b-0befd5ea27df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dep\minizip">
+      <UniqueIdentifier>{88a010fe-f581-4be3-96c4-01fe1ee20c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dep\zlib">
+      <UniqueIdentifier>{f775a488-d349-4f05-95aa-398bd2985b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dep\tinymt">
+      <UniqueIdentifier>{42f367d8-a2c2-427a-ad98-e96de07dd5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\_topheaders">
+      <UniqueIdentifier>{b63f8ae8-df70-4a62-bfc8-082399077881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\core">
+      <UniqueIdentifier>{c35eeba0-c728-464f-bdf4-f04f9023a3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\vfs">
+      <UniqueIdentifier>{99de0420-b546-4091-bab3-4e212b31e8a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\math">
+      <UniqueIdentifier>{641f1434-8ab4-40e9-b2cb-96faab63f0be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\renderer">
+      <UniqueIdentifier>{82266587-56ab-4e3e-86f2-4d2f3b73c0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\engine">
+      <UniqueIdentifier>{dd638e5d-f26a-4742-a3b1-540898383a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="globe\scenegraph">
+      <UniqueIdentifier>{f0c02072-94af-4fb3-9c41-f56a31acb604}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\minizip\zip.h">
+      <Filter>dep\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\minizip\crypt.h">
+      <Filter>dep\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\minizip\ioapi.h">
+      <Filter>dep\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\minizip\unzip.h">
+      <Filter>dep\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\tinymt\inttypes.h">
+      <Filter>dep\tinymt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\tinymt\stdint.h">
+      <Filter>dep\tinymt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\tinymt\tinymt32.hpp">
+      <Filter>dep\tinymt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\tinymt\tinymt64.hpp">
+      <Filter>dep\tinymt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\crc32.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\deflate.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\inffast.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\inffixed.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\inflate.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\inftrees.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\trees.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\zconf.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\zlib.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zlib\zutil.h">
+      <Filter>dep\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\_internal.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\globe.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\setup\macros.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\setup\platform.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\setup\types.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Timer.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\ConfigFileRo.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\ConfigFileRo.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\DateTime.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\DateTime.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Exception.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Exception.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\ExceptionCode.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\ExceptionCodes.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\File.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\File.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileDisk.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileDisk.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileIterator.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileIterator.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileMem.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileMem.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\FileSystem.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Logger.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Logger.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\NonCopyable.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Singleton.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\SmartPointer.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\SmartPointer.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\StlHelpers.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\StlHelpers.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\StringA.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\StringA.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\System.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\System.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Animation.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Animation.inl.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Drawable.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Effect.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Effect.inl.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Mesh.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\engine\Mesh.inl.hpp">
+      <Filter>globe\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Color4.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Color4.inl.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Math.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Math.inl.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Matrix4.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Matrix4.inl.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Quaternion.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Quaternion.inl.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Vector2.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Vector2.inl.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Vector3.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\math\Vector3.inl.hpp">
+      <Filter>globe\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\VolumeTexture.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\CubeTexture.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\CubeTexture.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Font.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Font.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\IndexBuffer.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\IndexBuffer.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Renderer.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Renderer.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Surface.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Surface.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Texture.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\Texture.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\VertexBuffer.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\VertexBuffer.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\VertexDeclaration.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\VertexDeclaration.inl.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\renderer\VolumeTexture.hpp">
+      <Filter>globe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneCamera.hpp">
+      <Filter>globe\scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneCamera.inl.hpp">
+      <Filter>globe\scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneNode.hpp">
+      <Filter>globe\scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\scenegraph\SceneNode.inl.hpp">
+      <Filter>globe\scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\vfs\Archive.hpp">
+      <Filter>globe\vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\vfs\Archive.inl.hpp">
+      <Filter>globe\vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\vfs\VFS.hpp">
+      <Filter>globe\vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\vfs\VFS.inl.hpp">
+      <Filter>globe\vfs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\minizip\ioapi.c">
+      <Filter>dep\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\minizip\unzip.c">
+      <Filter>dep\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\minizip\zip.c">
+      <Filter>dep\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tinymt\tinymt32.cpp">
+      <Filter>dep\tinymt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tinymt\tinymt64.cpp">
+      <Filter>dep\tinymt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\adler32.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\compress.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\crc32.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\deflate.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\infback.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\inffast.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\inflate.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\inftrees.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\trees.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\uncompr.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zlib\zutil.c">
+      <Filter>dep\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Timer.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ConfigFileRo.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DateTime.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Exception.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\File.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileDisk.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileIterator.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileMem.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Logger.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\StringA.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\System.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Mesh.cpp">
+      <Filter>globe\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Animation.cpp">
+      <Filter>globe\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Effect.cpp">
+      <Filter>globe\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Vector2.cpp">
+      <Filter>globe\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Vector3.cpp">
+      <Filter>globe\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Color4.cpp">
+      <Filter>globe\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Math.cpp">
+      <Filter>globe\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Matrix4.cpp">
+      <Filter>globe\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Quaternion.cpp">
+      <Filter>globe\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SceneNode.cpp">
+      <Filter>globe\scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SceneCamera.cpp">
+      <Filter>globe\scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\VolumeTexture.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\CubeTexture.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Font.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IndexBuffer.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Renderer.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Surface.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Texture.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\VertexBuffer.cpp">
+      <Filter>globe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\VFS.cpp">
+      <Filter>globe\vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Archive.cpp">
+      <Filter>globe\vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\_internal.cpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
