@@ -61,7 +61,7 @@ public :
   bool       isArchivedFile     (const char* pszVirtPath) const;
   uint       getFileSize        (const char* pszVirtPath) const;
   StringAVec findFiles          (const char* pszVirtPathMask) const;
-  StringA    extractPhysFiles   (const char* pszVirtPathMask); // extract multiple files to a temporary physical directory (note : it is up to the caller do destroy the created directory)
+  StringA    extractPhysFiles   (const char* pszVirtPathMask); // extract multiple files to a physical temp dir (note : it is up to the caller to destroy the created directory)
   bool       hasAcquiredFiles   (void) const;
   uint       countAcquiredFiles (void) const;
   StringA    acquirePhysFile    (const char* pszVirtPath);

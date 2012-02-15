@@ -333,7 +333,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -353,12 +352,12 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d9.lib;dxerr9.lib;d3dx9d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(OutDir)$(TargetName)_dll.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Command>PostCompile_Globe.bat DllDebug</Command>
@@ -376,7 +375,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -403,7 +401,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeaderFile>_internal.hpp</PrecompiledHeaderFile>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -412,6 +409,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>d3d9.lib;dxerr9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcp.lib</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>$(OutDir)$(TargetName)_dll.lib</ImportLibrary>
     </Link>
     <Lib>
       <IgnoreSpecificDefaultLibraries>libcp.lib</IgnoreSpecificDefaultLibraries>
