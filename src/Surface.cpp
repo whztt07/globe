@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -24,3 +25,4 @@ D3DSURFACE_DESC Surface::getDesc (void)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

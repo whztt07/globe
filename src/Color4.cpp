@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -24,3 +25,4 @@ const Color4 Color4::CYAN   = Color4(0.0f, 1.0f, 1.0f, 1.0f);
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

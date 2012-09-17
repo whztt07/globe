@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -20,3 +21,4 @@ const Vector3 Vector3::UNIT_Z = Vector3(0.0f, 0.0f, 1.0f);
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

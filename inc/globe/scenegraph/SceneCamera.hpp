@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_SCENECAMERA_H__
 #define __GLOBE_SCENECAMERA_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -43,4 +44,5 @@ protected :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_SCENECAMERA_H__

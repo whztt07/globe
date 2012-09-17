@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -34,3 +35,4 @@ Quaternion::Quaternion (float angleX, float angleY, float angleZ)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

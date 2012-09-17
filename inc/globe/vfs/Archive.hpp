@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_ARCHIVE_H__
 #define __GLOBE_ARCHIVE_H__
+#ifdef GLOBE_VFS
 namespace glb {
 
 
@@ -127,4 +128,5 @@ private :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_VFS
 #endif // #ifndef __GLOBE_ARCHIVE_H__

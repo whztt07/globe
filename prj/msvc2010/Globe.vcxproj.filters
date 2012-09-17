@@ -333,6 +333,15 @@
     <ClInclude Include="..\..\inc\globe\vfs\VFS.inl.hpp">
       <Filter>globe\vfs</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Random.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Random.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\setup\defconfig.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\minizip\ioapi.c">
@@ -484,6 +493,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\_internal.cpp">
       <Filter>globe\_topheaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Random.cpp">
+      <Filter>globe\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

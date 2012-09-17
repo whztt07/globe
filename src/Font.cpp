@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -35,3 +36,4 @@ TEXTMETRIC Font::getMetrics (void)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

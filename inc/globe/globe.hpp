@@ -11,6 +11,9 @@
 #define __GLOBE_ENGINE_H__
 
 
+// global default configuration
+#include "setup/defconfig.hpp"
+
 // debug mode ?
 #if defined(DEBUG) || defined(_DEBUG) || defined(__DEBUG)
 # ifndef GLB_DEBUG
@@ -43,10 +46,11 @@
 #include <strstream>
 
 // dependencies headers
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <dxerr9.h>
-//
+#ifdef GLOBE_GFX
+# include <d3d9.h>
+# include <d3dx9.h>
+# include <dxerr9.h>
+#endif
 #ifdef min
 # undef min
 # undef max
@@ -69,6 +73,7 @@
 #include "core/DateTime.hpp"
 #include "core/System.hpp"
 #include "core/Timer.hpp"
+#include "core/Random.hpp"
 //
 #include "core/Logger.hpp"
 #include "core/FileSystem.hpp"
@@ -79,37 +84,47 @@
 #include "core/ConfigFileRo.hpp"
 
 // vfs headers
-#include "vfs/Archive.hpp"
-#include "vfs/VFS.hpp"
+#ifdef GLOBE_VFS
+# include "vfs/Archive.hpp"
+# include "vfs/VFS.hpp"
+#endif
 
 // math headers
-#include "math/Math.hpp"
-#include "math/Vector2.hpp"
-#include "math/Vector3.hpp"
-#include "math/Color4.hpp"
-#include "math/Quaternion.hpp"
-#include "math/Matrix4.hpp"
+#ifdef GLOBE_GFX
+# include "math/Math.hpp"
+# include "math/Vector2.hpp"
+# include "math/Vector3.hpp"
+# include "math/Color4.hpp"
+# include "math/Quaternion.hpp"
+# include "math/Matrix4.hpp"
+#endif
 
 // renderer headers
-#include "renderer/Surface.hpp"
-#include "renderer/Texture.hpp"
-#include "renderer/Font.hpp"
-#include "renderer/CubeTexture.hpp"
-#include "renderer/VolumeTexture.hpp"
-#include "renderer/VertexBuffer.hpp"
-#include "renderer/IndexBuffer.hpp"
-#include "renderer/VertexDeclaration.hpp"
-#include "renderer/Renderer.hpp"
+#ifdef GLOBE_GFX
+# include "renderer/Surface.hpp"
+# include "renderer/Texture.hpp"
+# include "renderer/Font.hpp"
+# include "renderer/CubeTexture.hpp"
+# include "renderer/VolumeTexture.hpp"
+# include "renderer/VertexBuffer.hpp"
+# include "renderer/IndexBuffer.hpp"
+# include "renderer/VertexDeclaration.hpp"
+# include "renderer/Renderer.hpp"
+#endif
 
 // engine headers
-#include "engine/Animation.hpp"
-#include "engine/Drawable.hpp"
-#include "engine/Effect.hpp"
-#include "engine/Mesh.hpp"
+#ifdef GLOBE_GFX
+# include "engine/Animation.hpp"
+# include "engine/Drawable.hpp"
+# include "engine/Effect.hpp"
+# include "engine/Mesh.hpp"
+#endif
 
 // scenegraph headers
-#include "scenegraph/SceneNode.hpp"
-#include "scenegraph/SceneCamera.hpp"
+#ifdef GLOBE_GFX
+# include "scenegraph/SceneNode.hpp"
+# include "scenegraph/SceneCamera.hpp"
+#endif
 
 
 #endif // #ifndef __GLOBE_ENGINE_H__

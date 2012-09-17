@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_EFFECT_H__
 #define __GLOBE_EFFECT_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -73,4 +74,5 @@ private :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_EFFECT_H__

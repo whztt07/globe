@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_SCENENODE_H__
 #define __GLOBE_SCENENODE_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -71,4 +72,5 @@ protected :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_SCENENODE_H__

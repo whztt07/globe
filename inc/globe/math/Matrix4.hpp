@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_MATRIX4_H__
 #define __GLOBE_MATRIX4_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -66,4 +67,5 @@ public :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_MATRIX4_H__

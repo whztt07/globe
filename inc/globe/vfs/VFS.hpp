@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_VFS_H__
 #define __GLOBE_VFS_H__
+#ifdef GLOBE_VFS
 namespace glb {
 
 
@@ -95,4 +96,5 @@ static inline VFS* g_pVFS() { return VFS::getSingletonPtr(); }
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_VFS
 #endif // #ifndef __GLOBE_VFS_H__

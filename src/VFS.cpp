@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_VFS
 namespace glb {
 
 GLB_IMPLEMENT_SINGLETON(VFS)
@@ -462,3 +463,4 @@ void VFS::resetFiles (void)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_VFS

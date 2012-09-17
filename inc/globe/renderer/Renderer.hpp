@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_RENDERER_H__
 #define __GLOBE_RENDERER_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -98,4 +99,5 @@ static inline Renderer* g_pRenderer() { return Renderer::getSingletonPtr(); }
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_RENDERER_H__

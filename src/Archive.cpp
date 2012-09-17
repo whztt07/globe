@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_VFS
 namespace glb {
 
 
@@ -445,7 +446,7 @@ void Archive::createFromZip (const char* pszArchive, const char* pszZipFile, con
     memcpy(&header.aMagic, &c_aMagicRef, HEADER_MAGIC_SIZE);
     header.cVersion    = HEADER_VERSION;
     header.cXorKeySize = cXorKeySize;
-    Math::randBytesSecured((glb_byte*)&header.aXorKey, sizeof(header.aXorKey));
+    Random::getBytesSecured((glb_byte*)&header.aXorKey, sizeof(header.aXorKey));
     if (cXorKeySize > 0)
       memcpy(&header.aXorKey, pXorKey, (size_t)cXorKeySize);
 
@@ -686,3 +687,4 @@ int Archive::onUnzTestErrorS (void* pOpaque, void* pStream)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_VFS

@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -70,3 +71,4 @@ Animation Animation::load (const char* pszVirtDir)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

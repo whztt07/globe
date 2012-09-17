@@ -39,6 +39,8 @@
     <ClInclude Include="..\..\inc\globe\core\Logger.hpp" />
     <ClInclude Include="..\..\inc\globe\core\Logger.inl.hpp" />
     <ClInclude Include="..\..\inc\globe\core\NonCopyable.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Random.hpp" />
+    <ClInclude Include="..\..\inc\globe\core\Random.inl.hpp" />
     <ClInclude Include="..\..\inc\globe\core\Singleton.hpp" />
     <ClInclude Include="..\..\inc\globe\core\SmartPointer.hpp" />
     <ClInclude Include="..\..\inc\globe\core\SmartPointer.inl.hpp" />
@@ -91,6 +93,7 @@
     <ClInclude Include="..\..\inc\globe\scenegraph\SceneCamera.inl.hpp" />
     <ClInclude Include="..\..\inc\globe\scenegraph\SceneNode.hpp" />
     <ClInclude Include="..\..\inc\globe\scenegraph\SceneNode.inl.hpp" />
+    <ClInclude Include="..\..\inc\globe\setup\defconfig.hpp" />
     <ClInclude Include="..\..\inc\globe\setup\macros.hpp" />
     <ClInclude Include="..\..\inc\globe\setup\platform.hpp" />
     <ClInclude Include="..\..\inc\globe\setup\types.hpp" />
@@ -157,6 +160,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DllRelease|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\src\Quaternion.cpp" />
+    <ClCompile Include="..\..\src\Random.cpp" />
     <ClCompile Include="..\..\src\Renderer.cpp" />
     <ClCompile Include="..\..\src\SceneCamera.cpp" />
     <ClCompile Include="..\..\src\SceneNode.cpp" />
@@ -328,7 +332,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);GLOBE_VFS;GLOBE_GFX</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -348,7 +352,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;D3D_DEBUG_INFO;GLB_DLL_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;D3D_DEBUG_INFO;%(PreprocessorDefinitions);GLOBE_DLL_BUILD;GLOBE_VFS;GLOBE_GFX</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -370,7 +374,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);GLOBE_VFS;GLOBE_GFX</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -396,7 +400,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;GLB_DLL_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);GLOBE_DLL_BUILD;GLOBE_VFS;GLOBE_GFX</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>

@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -179,3 +180,4 @@ void Effect::onEffectAttached (void)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

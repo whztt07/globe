@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_MATH_H__
 #define __GLOBE_MATH_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -33,10 +34,6 @@ namespace glb {
 class GLB_EXPORT Math
 {
 public :
-  // init
-  static void init   (uint32 uiSeed32=0, uint64 uiSeed64=0);
-  static bool isInit (void);
-
   // calculation
   template <typename T> static T abs   (T val);
   template <typename T> static T ceil  (T val);
@@ -78,39 +75,6 @@ public :
   template <typename T> static T smoothStep  (T val, T low, T high);
   template <typename T> static T map         (T val, T low1, T high1, T low2, T high2);
   template <typename T> static T norm        (T val, T low, T high);
-
-  // randomness - seed
-  static void randSeeds (uint32 uiSeed32, uint64 uiSeed64);
-
-  // randomness - mersenne-twister (linear)
-                        static uint32 randUint32    (void); //  0   <= r < 2^32
-                        static uint32 randUint32    (uint32 uiMin, uint32 uiMax);
-                        static uint64 randUint64    (void); //  0   <= r < 2^64
-                        static uint64 randUint64    (uint64 uiMin, uint64 uiMax);
-  template <typename T> static T      randUnit      (void); //  0.0 <= r < 1.0
-  template <typename T> static T      randSymmetric (void); // -1.0 <= r < 1.0
-  template <typename T> static T      randRange     (T rMin, T rMax); // min <= r < max
-                        static void   randBytes     (glb_byte* pDestBuffer, uint uiSize);
-
-  // randomness - gaussian (normaly distributed)
-  template <typename T> static T randGaussian (void);
-
-  // randomness - security
-  // more expensive than the regular methods for the sake of security
-  static void randBytesSecured (glb_byte* pDestBuffer, uint uiSize);
-
-
-private :
-  static uint32  rand32_uint32 (void);
-  static float32 rand32_float  (void);
-  static uint64  rand64_uint64 (void);
-  static float64 rand64_double (void);
-
-  static double boxMuller (double m, double s);
-
-
-private :
-  static bool ms_bInit;
 };
 
 
@@ -118,4 +82,5 @@ private :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_MATH_H__

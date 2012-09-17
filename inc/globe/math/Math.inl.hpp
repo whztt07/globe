@@ -9,15 +9,6 @@
 
 
 //---------------------------------------------------------------------------
-inline bool Math::isInit (void)
-{
-  return ms_bInit;
-}
-
-
-
-
-//---------------------------------------------------------------------------
 template <typename T> GLB_FORCEINLINE T Math::abs (T val)
 {
   return ::abs(val); // (val < 0) ? -val : val;
@@ -286,86 +277,4 @@ template <typename T> inline T Math::map (T val, T low1, T high1, T low2, T high
 template <typename T> inline T Math::norm (T val, T low, T high)
 {
   return (val - low) / (high - low);
-}
-
-
-
-
-//---------------------------------------------------------------------------
-GLB_FORCEINLINE uint32 Math::randUint32 (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return Math::rand32_uint32();
-}
-
-//---------------------------------------------------------------------------
-GLB_FORCEINLINE uint32 Math::randUint32 (uint32 uiMin, uint32 uiMax)
-{
-  GLB_ASSERT(ms_bInit);
-  GLB_ASSERT(uiMax > uiMin);
-  return Math::rand32_uint32() % (uiMax - uiMin + 1) + uiMin;
-}
-
-//---------------------------------------------------------------------------
-GLB_FORCEINLINE uint64 Math::randUint64 (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return Math::rand64_uint64();
-}
-
-//---------------------------------------------------------------------------
-GLB_FORCEINLINE uint64 Math::randUint64 (uint64 uiMin, uint64 uiMax)
-{
-  GLB_ASSERT(ms_bInit);
-  GLB_ASSERT(uiMax > uiMin);
-  return Math::rand64_uint64() % (uiMax - uiMin + 1) + uiMin;
-}
-
-//---------------------------------------------------------------------------
-template<> GLB_FORCEINLINE float32 Math::randUnit (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return Math::rand32_float();
-}
-
-//---------------------------------------------------------------------------
-template<> GLB_FORCEINLINE float64 Math::randUnit (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return Math::rand64_double();
-}
-
-//---------------------------------------------------------------------------
-template <typename T> GLB_FORCEINLINE T Math::randUnit (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return (T)Math::rand64_double()
-}
-
-//---------------------------------------------------------------------------
-template<> GLB_FORCEINLINE float32 Math::randSymmetric (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return 2.0f * Math::rand32_float() - 1.0f;
-}
-
-//---------------------------------------------------------------------------
-template<> GLB_FORCEINLINE float64 Math::randSymmetric (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return 2.0 * Math::rand64_double() - 1.0;
-}
-
-//---------------------------------------------------------------------------
-template <typename T> GLB_FORCEINLINE T Math::randSymmetric (void)
-{
-  GLB_ASSERT(ms_bInit);
-  return T(2.0 * Math::rand64_double() - 1.0);
-}
-
-//---------------------------------------------------------------------------
-template <typename T> GLB_FORCEINLINE T Math::randRange (T rMin, T rMax)
-{
-  GLB_ASSERT(ms_bInit);
-  return (rMax - rMin) * Math::randUnit<T>() + rMin;
 }

@@ -43,10 +43,14 @@
 
 #include <globe/globe.hpp>
 
-#include "zlib/zlib.h"
+#ifdef GLOBE_VFS
+# include "zlib/zlib.h"
+#endif
 
-#include "minizip/zip.h"
-#include "minizip/unzip.h"
+#ifdef GLOBE_VFS
+# include "minizip/zip.h"
+# include "minizip/unzip.h"
+#endif
 
 #include "tinymt/tinymt32.hpp"
 #include "tinymt/tinymt64.hpp"

@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -86,3 +87,4 @@ Matrix4 SceneNode::getAbsoluteTransform (void)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

@@ -9,6 +9,7 @@
 
 #ifndef __GLOBE_DRAWABLE_H__
 #define __GLOBE_DRAWABLE_H__
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -23,4 +24,5 @@ public :
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
 #endif // #ifndef __GLOBE_DRAWABLE_H__

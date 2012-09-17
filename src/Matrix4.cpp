@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -26,3 +27,4 @@ const Matrix4 Matrix4::IDENTITY = Matrix4(
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

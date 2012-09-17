@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -36,3 +37,4 @@ D3DSURFACE_DESC Texture::getLevelDesc (uint uiLevel/*=0*/)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

@@ -14,9 +14,9 @@
 // GLB_EXPORT
 #if defined(GLB_PLATFORM_WINDOWS)
 # if defined(GLB_COMPILER_MSVC) || defined(GLB_COMPILER_GCC)
-#   if defined(GLB_DLL_BUILD)
+#   if defined(GLOBE_DLL_BUILD)
 #     define GLB_EXPORT  __declspec(dllexport)
-#   elif defined(GLB_DLL_CLIENT_BUILD)
+#   elif defined(GLOBE_DLL_CLIENT_BUILD)
 #     define GLB_EXPORT  __declspec(dllimport)
 #   else
 #     define GLB_EXPORT

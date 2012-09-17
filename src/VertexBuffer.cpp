@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 
@@ -24,3 +25,4 @@ void* VertexBuffer::lock (uint uiOffset, uint uiSize, DWORD dwFlags)
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX

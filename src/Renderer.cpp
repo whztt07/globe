@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "_internal.hpp"
+#ifdef GLOBE_GFX
 namespace glb {
 
 GLB_IMPLEMENT_SINGLETON(Renderer)
@@ -662,3 +663,4 @@ void Renderer::directxResultTest (HRESULT hRes, const char* pszSrcFile/*=NULL*/,
 
 
 } // namespace glb
+#endif // #ifdef GLOBE_GFX
