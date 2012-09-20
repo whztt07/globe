@@ -11,8 +11,8 @@
 #define __GLOBE_ENGINE_H__
 
 
-// global default configuration
-#include "setup/defconfig.hpp"
+// global configuration
+#include "setup/config.hpp"
 
 // debug mode ?
 #if defined(DEBUG) || defined(_DEBUG) || defined(__DEBUG)
@@ -74,6 +74,7 @@
 #include "core/System.hpp"
 #include "core/Timer.hpp"
 #include "core/Random.hpp"
+#include "core/Version3.hpp"
 //
 #include "core/Logger.hpp"
 #include "core/FileSystem.hpp"

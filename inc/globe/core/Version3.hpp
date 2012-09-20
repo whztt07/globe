@@ -1,0 +1,89 @@
+//***************************************************************************
+//
+// Author     : Jean-Charles Lefebvre
+// Created On : 2012-09-20 11:08:49
+//
+// $Id$
+//
+//***************************************************************************
+
+#ifndef __GLOBE_VERSION3_H__
+#define __GLOBE_VERSION3_H__
+namespace glb {
+
+
+//---------------------------------------------------------------------------
+// Version3
+//
+// A valid Version3 string must be formatted this way :
+// "M.m.R" or "M.mm.RRRR"
+//
+// Where :
+// * "M" is the major version number
+// * "m" is the minor version number
+// * "R" is the revision/build/whatever-you-want version number
+//
+// A valid Version3 has its components' values in :
+// * 0 <= Major    <= 9
+// * 0 <= minor    <= 99
+// * 0 <= Revision <= 9999
+//
+// The "combined" value is an all-in-one representation of the 3 components
+// of Version3 and is computed this way :
+// (1000000 * Major) + (10000 * minor) + Revision
+//---------------------------------------------------------------------------
+class GLB_EXPORT Version3
+{
+public :
+  Version3 (void);
+  Version3 (int32 iMajor, int32 iMinor, int32 iRevision);
+  Version3 (int32 iCombined);
+  Version3 (const char* pszVersion);
+  Version3 (const Version3& rhs);
+  ~Version3 (void);
+
+  bool init (int32 iMajor, int32 iMinor, int32 iRevision);
+  bool init (int nCombined);
+  bool init (const char* pszVersion);
+
+  Version3& operator= (const Version3& rhs);
+
+  bool isValid (void) const;
+
+  bool operator== (const Version3& rhs) const;
+  bool operator!= (const Version3& rhs) const;
+  bool operator<  (const Version3& rhs) const;
+  bool operator<= (const Version3& rhs) const;
+  bool operator>  (const Version3& rhs) const;
+  bool operator>= (const Version3& rhs) const;
+
+  int         getMajor          (void) const;
+  int         getMinor          (void) const;
+  int         getRevision       (void) const;
+  int         getCombined       (void) const;
+  const char* getStrippedString (void) const; // "M.m.R" or "M.m" or "M"
+  const char* getPaddedString   (void) const; // "M.mm.RRRR"
+
+
+private :
+  void reset        (void);
+  void buildStrings (void) const;
+
+
+private :
+  int32 m_iCombined;
+
+  int32 m_iMajor;
+  int32 m_iMinor;
+  int32 m_iRevision;
+
+  mutable char m_szStripped[12];
+  mutable char m_szPadded[12];
+};
+
+
+#include "Version3.inl.hpp"
+
+
+}
+#endif // #ifndef __GLOBE_VERSION3_H__

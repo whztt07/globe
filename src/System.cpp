@@ -18,6 +18,52 @@ int System::ms_nIsBigEndian = -1;
 
 
 //---------------------------------------------------------------------------
+#ifdef GLB_PLATFORM_WINDOWS
+void System::cmdLineToStringVec (StringAVec& vecArgs)
+{
+  int     iArgs = 0;
+  LPWSTR* pArgs;
+
+  vecArgs.clear();
+  if (!wcslen(::GetCommandLineW()))
+    return;
+
+  pArgs = ::CommandLineToArgvW(GetCommandLineW(), &iArgs);
+  if (!pArgs)
+    GLB_THROW(EXCODE_SYSTEM_API, "Failed to parse command line ! Error %u : %s", System::lastError(), System::lastErrorString());
+
+  // unicode to ansi
+  for (int i = 0; i < iArgs; ++i)
+  {
+    int   iRes;
+    uint  uiWChars   = wcslen(pArgs[i]) + 1;
+    uint  uiAnsiSize = uiWChars * 2;
+    char* pszAnsi;
+
+    vecArgs.push_back(StringA());
+    pszAnsi = vecArgs[vecArgs.size()-1].acquireBuffer(uiAnsiSize, false);
+
+    iRes = ::WideCharToMultiByte(CP_ACP, 0, pArgs[i], uiWChars, pszAnsi, uiAnsiSize, NULL, NULL);
+    if (!iRes)
+      GLB_THROW(EXCODE_SYSTEM_API, "WideCharToMultiByte() failed while parsing command line ! Error %u : %s", System::lastError(), System::lastErrorString());
+
+    vecArgs[vecArgs.size()-1].releaseBuffer();
+    if (vecArgs[vecArgs.size()-1].isEmpty())
+      vecArgs.pop_back();
+  }
+
+  LocalFree(pArgs);
+}
+#else
+void System::cmdLineToStringVec (StringAVec& vecArgs, int argc, char** argv)
+{
+  vecArgs.clear();
+  for (int i = 0; i < argc; ++i)
+    vecArgs.push_back(argv[i]);
+}
+#endif
+
+//---------------------------------------------------------------------------
 uint System::getPID (void)
 {
   #if defined(GLB_PLATFORM_WINDOWS)

@@ -342,6 +342,15 @@
     <ClInclude Include="..\..\inc\globe\setup\defconfig.hpp">
       <Filter>globe\_topheaders</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\inc\globe\setup\config.hpp">
+      <Filter>globe\_topheaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Version3.inl.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\globe\core\Version3.hpp">
+      <Filter>globe\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\minizip\ioapi.c">
@@ -495,6 +504,9 @@
       <Filter>globe\_topheaders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Random.cpp">
+      <Filter>globe\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Version3.cpp">
       <Filter>globe\core</Filter>
     </ClCompile>
   </ItemGroup>

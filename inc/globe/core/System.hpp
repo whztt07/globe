@@ -18,6 +18,13 @@ namespace glb {
 class GLB_EXPORT System
 {
 public :
+  // windows command line processing
+#ifdef GLB_PLATFORM_WINDOWS
+  static void cmdLineToStringVec (StringAVec& vecArgs);
+#else
+  static void cmdLineToStringVec (StringAVec& vecArgs, int argc, char** argv);
+#endif
+
   // process
   static uint getPID (void); // current process id
 
