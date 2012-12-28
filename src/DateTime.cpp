@@ -196,13 +196,13 @@ StringA DateTime::nowToString (bool bUtc, bool bDate, bool bTime)
 time_t DateTime::timegm (const tm* pTm)
 {
   //
-  // * Hopefully portable implementation of timegm().
-  // * Public domain, written by Pasi Eronen <pe@iki.fi>.
-  // *
-  // * Notes:
-  // * - DOESN'T MODIFY THE STRUCT TM!
-  // * - Epoch doesn't have to be at January 1, 1970.
-  // * - Out-of-range fields for struct tm are not handled properly.
+  // Hopefully portable implementation of timegm().
+  // Public domain, written by Pasi Eronen <pe@iki.fi>.
+  //
+  // Notes:
+  // - DOESN'T MODIFY THE STRUCT TM!
+  // - Epoch doesn't have to be at January 1, 1970.
+  // - Out-of-range fields for struct tm are not handled properly.
   //
 
   #define LEAP_YEAR(y) (((y)%4 == 0) && ((y)%100 != 0 || (y)%400 == 0))

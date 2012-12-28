@@ -498,8 +498,8 @@ bool FileSystem::moveFile (const char* pszFrom, const char* pszTo, bool bOverwri
     int  iRes;
     SHFILEOPSTRUCTA fop;
 
-    // msdn says that it's important to ensure the pFrom and pTo members
-    // are double-null terminated...
+    // msdn says it's important to ensure that pFrom and pTo members are
+    // correctly terminated by 2 null characters...
     strcpy((char*)&szFrom, pszFrom);
     szFrom[strlen((char*)&szFrom) + 1] = '\0';
     strcpy((char*)&szTo, pszTo);

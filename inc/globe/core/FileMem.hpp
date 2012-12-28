@@ -19,8 +19,8 @@ class GLB_EXPORT FileMem : public File
 {
 public :
   FileMem (void);
-  FileMem (uint32 uiGrowBytes); // implicit call to OpenNew()
-  FileMem (const char* pBuffer, uint32 uiBufferSize, uint32 uiInitialFileSize, uint32 uiGrowBytes=0); // implicit call to Open()
+  FileMem (uint32 uiGrowBytes); // implicit call to openNew()
+  FileMem (const char* pBuffer, uint32 uiBufferSize, uint32 uiInitialFileSize, uint32 uiGrowBytes=0); // implicit call to open()
   virtual ~FileMem (void);
 
   // open / close
