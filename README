@@ -1,0 +1,7 @@
+Globe
+
+A small C++ library created for personal use to allow fast prototyping of
+realtime rendering Direct3D animations.
+
+Jean-Charles Lefebvre <jcl [AT] jcl [DOT] io>
+http://www.jcl.io
