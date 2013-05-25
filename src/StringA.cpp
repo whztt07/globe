@@ -1,4 +1,4 @@
-//***************************************************************************
+//******************************************************************************
 //
 // Globe
 // A small C++ library to allow fast prototyping of Direct3D animations.
@@ -22,31 +22,30 @@
 // 3. This notice may not be removed or altered from any source distribution.
 //
 //
-// Author     : Jean-Charles Lefebvre
-// Created On : 2011-10-07 18:46:25
+// Author:     Jean-Charles Lefebvre
+// Created On: 2011-10-07 18:46:25
 //
 // $Id$
 //
-//***************************************************************************
+//******************************************************************************
 
 #include "_internal.hpp"
-namespace glb {
 
 
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Macros
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 //#define INTSIGNBITSET(i)     (((const unsigned long)(i)) >> 31)
 #define INTSIGNBITNOTSET(i)  ((~((const unsigned long)(i))) >> 31)
 
 
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Constants
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 static const char* c_apszBytesUnits[5] = { "B", "KB", "MB", "GB", "TB" };
 
 // If you make changes to this structure, be sure to reflect your changes to
-// the following methods :
+// the following methods:
 // * StringA::strIsBool()
 // * StringA::operator=(const bool)
 // * StringA::append(const bool)
@@ -54,12 +53,12 @@ static const char* c_apszBytesUnits[5] = { "B", "KB", "MB", "GB", "TB" };
 // enum...
 static const struct c_aBooleanStrings_
 {
-  struct b_
-  {
-    uint8 uiLen;
-    const char* psz;
-  }
-  b[2];
+    struct b_
+    {
+        STRA_UINT8 uiLen;
+        const char* psz;
+    }
+    b[2];
 }
 c_aBooleanStrings[4] =
 {
@@ -71,17 +70,15 @@ c_aBooleanStrings[4] =
 
 
 
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Static Members
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 StringA::BoolStringType StringA::ms_eBoolStringType = StringA::BOOLSTRINGTYPE_YESNO;
 
 
 
 
-//---------------------------------------------------------------------------
-// reset
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::reset (void)
 {
   if (this->isBufferAlloc())
@@ -93,14 +90,12 @@ void StringA::reset (void)
 
 
 
-//---------------------------------------------------------------------------
-// resize
-//---------------------------------------------------------------------------
-void StringA::resize (uint uiDesiredSize, bool bKeepOldContent/*=true*/)
+//------------------------------------------------------------------------------
+void StringA::resize (STRA_UINT uiDesiredSize, bool bKeepOldContent/*=true*/)
 {
-  uint uiTemp;
+  STRA_UINT uiTemp;
 
-  GLB_ASSERT(uiDesiredSize >= 1);
+  STRA_ASSERT(uiDesiredSize >= 1);
 
   // do we need to resize ?
   if (uiDesiredSize == m_uiAllocSize)
@@ -117,7 +112,7 @@ void StringA::resize (uint uiDesiredSize, bool bKeepOldContent/*=true*/)
     if (uiTemp != 0)
       uiDesiredSize = uiDesiredSize + (STRING_GROW_SIZE - uiTemp);
   }
-  GLB_ASSERT(uiDesiredSize >= 1);
+  STRA_ASSERT(uiDesiredSize >= 1);
 
   // shrink string length if needed
   if (!bKeepOldContent)
@@ -138,7 +133,7 @@ void StringA::resize (uint uiDesiredSize, bool bKeepOldContent/*=true*/)
       if (bKeepOldContent)
       {
         m_pszData[m_uiLength] = 0;
-        strcpy((char*)&m_szBaseBuffer, m_pszData); // do not use memcpy() here, this is not secure enough !
+        strcpy((char*)&m_szBaseBuffer, m_pszData); // do not use memcpy() here, this is not secure enough!
       }
       else
       {
@@ -160,15 +155,15 @@ void StringA::resize (uint uiDesiredSize, bool bKeepOldContent/*=true*/)
     if (bKeepOldContent)
     {
       m_szBaseBuffer[m_uiLength] = 0;
-      strcpy(m_pszData, (char*)&m_szBaseBuffer); // do not use memcpy() here, this is not secure enough !
+      strcpy(m_pszData, (char*)&m_szBaseBuffer); // do not use memcpy() here, this is not secure enough!
     }
     else
     {
       m_pszData[m_uiLength] = 0;
     }
   }
-  GLB_ASSERT(m_pszData[m_uiLength] == 0);
-  GLB_ASSERT((uint)strlen(m_pszData) == m_uiLength);
+  STRA_ASSERT(m_pszData[m_uiLength] == 0);
+  STRA_ASSERT((STRA_UINT)strlen(m_pszData) == m_uiLength);
 
   // update alloc size
   m_uiAllocSize = uiDesiredSize;
@@ -177,31 +172,27 @@ void StringA::resize (uint uiDesiredSize, bool bKeepOldContent/*=true*/)
 
 
 
-//---------------------------------------------------------------------------
-// acquireBuffer
-//---------------------------------------------------------------------------
-char* StringA::acquireBuffer (uint uiMinRequiredBufferSize, bool bKeepOldContent/*=true*/)
+//------------------------------------------------------------------------------
+char* StringA::acquireBuffer (STRA_UINT uiMinRequiredBufferSize, bool bKeepOldContent/*=true*/)
 {
   this->grow(uiMinRequiredBufferSize, bKeepOldContent);
   return m_pszData;
 }
 
-//---------------------------------------------------------------------------
-// releaseBuffer
-//---------------------------------------------------------------------------
-void StringA::releaseBuffer (uint uiNewStringLength/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::releaseBuffer (STRA_UINT uiNewStringLength/*=0*/)
 {
   if (uiNewStringLength <= 0)
   {
-    m_uiLength = (uint)strlen(m_pszData);
+    m_uiLength = (STRA_UINT)strlen(m_pszData);
   }
   else
   {
     m_uiLength = uiNewStringLength;
-    GLB_ASSERT(m_pszData[m_uiLength] == 0);
+    STRA_ASSERT(m_pszData[m_uiLength] == 0);
   }
 
-  GLB_ASSERT(m_uiLength < m_uiAllocSize);
+  STRA_ASSERT(m_uiLength < m_uiAllocSize);
   if (m_uiLength >= m_uiAllocSize)
   {
     m_uiLength = m_uiAllocSize - 1;
@@ -212,12 +203,10 @@ void StringA::releaseBuffer (uint uiNewStringLength/*=0*/)
 
 
 
-//---------------------------------------------------------------------------
-// copy
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::copy (const StringA& strSource)
 {
-  GLB_ASSERT(&strSource != this);
+  STRA_ASSERT(&strSource != this);
   if (&strSource == this)
     return;
 
@@ -228,9 +217,7 @@ void StringA::copy (const StringA& strSource)
   m_uiLength = strSource.m_uiLength;
 }
 
-//---------------------------------------------------------------------------
-// copy
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::copy (const char* pszSource)
 {
   // handle null destination string
@@ -249,9 +236,9 @@ void StringA::copy (const char* pszSource)
   // is it simply aliasing ?
   if ((pszSource >= m_pszData) && (pszSource <= (m_pszData + m_uiLength)))
   {
-    uint Ix;
+    STRA_UINT Ix;
 
-    GLB_ASSERT(strlen(pszSource) <= m_uiLength);
+    STRA_ASSERT(strlen(pszSource) <= m_uiLength);
 
     for (Ix = 0; pszSource[Ix]; ++Ix)
       m_pszData[Ix] = pszSource[Ix];
@@ -261,10 +248,10 @@ void StringA::copy (const char* pszSource)
   }
   else
   {
-    uint uiLen;
+    STRA_UINT uiLen;
 
     // ensure we are big enough
-    uiLen = (uint)strlen(pszSource);
+    uiLen = (STRA_UINT)strlen(pszSource);
     this->grow(uiLen + 1, false);
 
     // copy
@@ -274,10 +261,8 @@ void StringA::copy (const char* pszSource)
   }
 }
 
-//---------------------------------------------------------------------------
-// copyCount
-//---------------------------------------------------------------------------
-void StringA::copyCount (const char* pszSource, uint uiSourceLength, uint uiSourceStartOffset/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::copyCount (const char* pszSource, STRA_UINT uiSourceLength, STRA_UINT uiSourceStartOffset/*=0*/)
 {
   // handle null destination string
   if (!pszSource)
@@ -291,7 +276,7 @@ void StringA::copyCount (const char* pszSource, uint uiSourceLength, uint uiSour
   // adjust source string if needed
   if (uiSourceStartOffset >= 1)
   {
-    GLB_ASSERT(uiSourceStartOffset < (uint)strlen(pszSource));
+    STRA_ASSERT(uiSourceStartOffset < (STRA_UINT)strlen(pszSource));
     pszSource += uiSourceStartOffset;
   }
 
@@ -309,9 +294,9 @@ void StringA::copyCount (const char* pszSource, uint uiSourceLength, uint uiSour
   // is it simply aliasing ?
   if ((pszSource >= m_pszData) && (pszSource <= (m_pszData + m_uiLength)))
   {
-    uint Ix;
+    STRA_UINT Ix;
 
-    GLB_ASSERT((uint)strlen(pszSource) <= m_uiLength);
+    STRA_ASSERT((STRA_UINT)strlen(pszSource) <= m_uiLength);
 
     for (Ix = 0; pszSource[Ix] && (Ix < uiSourceLength); ++Ix)
       m_pszData[Ix] = pszSource[Ix];
@@ -321,10 +306,10 @@ void StringA::copyCount (const char* pszSource, uint uiSourceLength, uint uiSour
   }
   else
   {
-    uint uiLen;
+    STRA_UINT uiLen;
 
     // ensure we are big enough
-    uiLen = (uint)strlen(pszSource);
+    uiLen = (STRA_UINT)strlen(pszSource);
     if (uiLen > uiSourceLength)
       uiLen = uiSourceLength;
     this->grow(uiLen + 1, false);
@@ -339,22 +324,18 @@ void StringA::copyCount (const char* pszSource, uint uiSourceLength, uint uiSour
 
 
 
-//---------------------------------------------------------------------------
-// operator=
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::operator= (const bool b)
 {
   int  nBool = (int)b;
-  uint uiLen = (uint)c_aBooleanStrings[ms_eBoolStringType].b[nBool].uiLen;
+  STRA_UINT uiLen = (STRA_UINT)c_aBooleanStrings[ms_eBoolStringType].b[nBool].uiLen;
 
   this->grow(uiLen + 1, false);
   memcpy(m_pszData, c_aBooleanStrings[ms_eBoolStringType].b[nBool].psz, size_t(uiLen + 1));
   m_uiLength = uiLen;
 }
 
-//---------------------------------------------------------------------------
-// operator=
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::operator= (const float f)
 {
   char tmp[64];
@@ -367,21 +348,19 @@ void StringA::operator= (const float f)
     return;
   }
 
-	while ((nLen > 0) && (tmp[nLen-1] == '0'))
+  while ((nLen > 0) && (tmp[nLen-1] == '0'))
     tmp[--nLen] = 0;
-	while ((nLen > 0) && (tmp[nLen-1] == '.'))
+  while ((nLen > 0) && (tmp[nLen-1] == '.'))
     tmp[--nLen] = 0;
-  GLB_ASSERT((int)strlen((char*)&tmp) == nLen);
+  STRA_ASSERT((int)strlen((char*)&tmp) == nLen);
 
-  this->grow((uint)nLen + 1, false);
+  this->grow((STRA_UINT)nLen + 1, false);
 
   memcpy(m_pszData, (char*)&tmp, size_t(nLen + 1));
-  m_uiLength = (uint)nLen;
+  m_uiLength = (STRA_UINT)nLen;
 }
 
-//---------------------------------------------------------------------------
-// operator=
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::operator= (const double d)
 {
   char tmp[64];
@@ -394,27 +373,25 @@ void StringA::operator= (const double d)
     return;
   }
 
-	while ((nLen > 0) && (tmp[nLen-1] == '0'))
+  while ((nLen > 0) && (tmp[nLen-1] == '0'))
     tmp[--nLen] = 0;
-	while ((nLen > 0) && (tmp[nLen-1] == '.'))
+  while ((nLen > 0) && (tmp[nLen-1] == '.'))
     tmp[--nLen] = 0;
-  GLB_ASSERT((int)strlen((char*)&tmp) == nLen);
+  STRA_ASSERT((int)strlen((char*)&tmp) == nLen);
 
-  this->grow((uint)nLen + 1, false);
+  this->grow((STRA_UINT)nLen + 1, false);
 
   memcpy(m_pszData, (char*)&tmp, size_t(nLen + 1));
-  m_uiLength = (uint)nLen;
+  m_uiLength = (STRA_UINT)nLen;
 }
 
 
 
 
-//---------------------------------------------------------------------------
-// append
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::append (const StringA& str)
 {
-  uint uiFinalLen = m_uiLength + str.m_uiLength;
+  STRA_UINT uiFinalLen = m_uiLength + str.m_uiLength;
 
   this->grow(uiFinalLen + 1, true);
 
@@ -423,12 +400,10 @@ void StringA::append (const StringA& str)
   m_uiLength = uiFinalLen;
 }
 
-//---------------------------------------------------------------------------
-// append
-//---------------------------------------------------------------------------
-void StringA::append (const StringA& str, uint uiLength)
+//------------------------------------------------------------------------------
+void StringA::append (const StringA& str, STRA_UINT uiLength)
 {
-  uint uiFinalLen;
+  STRA_UINT uiFinalLen;
 
   if (!uiLength)
     return;
@@ -443,19 +418,17 @@ void StringA::append (const StringA& str, uint uiLength)
   m_uiLength = uiFinalLen;
 }
 
-//---------------------------------------------------------------------------
-// append
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::append (const char* psz)
 {
-  uint uiSrcLen;
-  uint uiFinalLen;
+  STRA_UINT uiSrcLen;
+  STRA_UINT uiFinalLen;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   if (!psz)
     return;
 
-  uiSrcLen   = (uint)strlen(psz);
+  uiSrcLen   = (STRA_UINT)strlen(psz);
   uiFinalLen = m_uiLength + uiSrcLen;
 
   this->grow(uiFinalLen + 1, true);
@@ -465,15 +438,13 @@ void StringA::append (const char* psz)
   m_uiLength = uiFinalLen;
 }
 
-//---------------------------------------------------------------------------
-// append
-//---------------------------------------------------------------------------
-void StringA::append (const char* psz, uint uiLength)
+//------------------------------------------------------------------------------
+void StringA::append (const char* psz, STRA_UINT uiLength)
 {
-  uint uiFinalLen;
-  uint Ix;
+  STRA_UINT uiFinalLen;
+  STRA_UINT Ix;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   if (!psz || !uiLength)
     return;
 
@@ -489,36 +460,20 @@ void StringA::append (const char* psz, uint uiLength)
   m_uiLength = uiFinalLen;
 }
 
-//---------------------------------------------------------------------------
-// appendUrlEscape
-//---------------------------------------------------------------------------
-void StringA::appendUrlEscape (const char* psz)
-{
-  StringA strSrc(psz);
-  StringA strDst;
-
-  strSrc.urlEscape(strDst);
-  *this += strDst;
-}
-
-//---------------------------------------------------------------------------
-// append
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::append (const bool b)
 {
   int nBool = (int)b;
-  this->append(c_aBooleanStrings[ms_eBoolStringType].b[nBool].psz, (uint)c_aBooleanStrings[ms_eBoolStringType].b[nBool].uiLen);
+  this->append(c_aBooleanStrings[ms_eBoolStringType].b[nBool].psz, (STRA_UINT)c_aBooleanStrings[ms_eBoolStringType].b[nBool].uiLen);
 }
 
 
 
 
-//---------------------------------------------------------------------------
-// insert
-//---------------------------------------------------------------------------
-void StringA::insert (const char c, uint uiOffset)
+//------------------------------------------------------------------------------
+void StringA::insert (const char c, STRA_UINT uiOffset)
 {
-  uint Ix;
+  STRA_UINT Ix;
 
   if (uiOffset > m_uiLength)
     uiOffset = m_uiLength;
@@ -532,20 +487,18 @@ void StringA::insert (const char c, uint uiOffset)
   ++m_uiLength;
 }
 
-//---------------------------------------------------------------------------
-// insert
-//---------------------------------------------------------------------------
-void StringA::insert (const char* psz, uint uiOffset, uint uiLength/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::insert (const char* psz, STRA_UINT uiOffset, STRA_UINT uiLength/*=0*/)
 {
-  uint Ix;
-  uint uiSrcLen;
+  STRA_UINT Ix;
+  STRA_UINT uiSrcLen;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   if (!psz || !psz[0])
     return;
 
   // grow buffer
-  uiSrcLen = (uint)strlen(psz);
+  uiSrcLen = (STRA_UINT)strlen(psz);
   if ((uiLength == 0) || (uiLength > uiSrcLen))
     uiLength = uiSrcLen;
   this->grow(m_uiLength + uiLength + 1, true);
@@ -564,42 +517,38 @@ void StringA::insert (const char* psz, uint uiOffset, uint uiLength/*=0*/)
 
 
 
-//---------------------------------------------------------------------------
-// erase
-//---------------------------------------------------------------------------
-void StringA::erase (int nOffset, uint uiLength/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::erase (int nOffset, STRA_UINT uiLength/*=0*/)
 {
   if (nOffset < 0)
     nOffset = (int)m_uiLength + nOffset;
-  else if ((uint)nOffset >= m_uiLength)
+  else if ((STRA_UINT)nOffset >= m_uiLength)
     return;
 
   if (uiLength == 0)
   {
-    uiLength = m_uiLength - (uint)nOffset;
+    uiLength = m_uiLength - (STRA_UINT)nOffset;
   }
-  else if (((uint)nOffset + uiLength) > m_uiLength)
+  else if (((STRA_UINT)nOffset + uiLength) > m_uiLength)
   {
     m_pszData[nOffset] = 0;
-    m_uiLength = (uint)nOffset;
+    m_uiLength = (STRA_UINT)nOffset;
     return;
   }
-  GLB_ASSERT(((uint)nOffset + uiLength) <= m_uiLength);
+  STRA_ASSERT(((STRA_UINT)nOffset + uiLength) <= m_uiLength);
 
-  memmove(&m_pszData[nOffset], &m_pszData[(uint)nOffset + uiLength], m_uiLength - (uint)nOffset - uiLength + 1);
+  memmove(&m_pszData[nOffset], &m_pszData[(STRA_UINT)nOffset + uiLength], m_uiLength - (STRA_UINT)nOffset - uiLength + 1);
   m_uiLength -= uiLength;
-  GLB_ASSERT(m_uiLength == (uint)strlen(m_pszData));
+  STRA_ASSERT(m_uiLength == (STRA_UINT)strlen(m_pszData));
 }
 
 
 
 
-//---------------------------------------------------------------------------
-// fill
-//---------------------------------------------------------------------------
-void StringA::fill (const char c, uint uiCount)
+//------------------------------------------------------------------------------
+void StringA::fill (const char c, STRA_UINT uiCount)
 {
-  GLB_ASSERT(uiCount);
+  STRA_ASSERT(uiCount);
   if (!uiCount)
     return;
 
@@ -610,21 +559,19 @@ void StringA::fill (const char c, uint uiCount)
   m_uiLength = uiCount;
 }
 
-//---------------------------------------------------------------------------
-// fill
-//---------------------------------------------------------------------------
-void StringA::fill (const char* psz, uint uiCount)
+//------------------------------------------------------------------------------
+void StringA::fill (const char* psz, STRA_UINT uiCount)
 {
-  uint  uiSrcLen;
-  uint  uiFinalLen;
+  STRA_UINT  uiSrcLen;
+  STRA_UINT  uiFinalLen;
   char* pDst;
 
-  GLB_ASSERT(psz);
-  GLB_ASSERT(uiCount);
+  STRA_ASSERT(psz);
+  STRA_ASSERT(uiCount);
   if (!psz || !uiCount)
     return;
 
-  uiSrcLen   = (uint)strlen(psz);
+  uiSrcLen   = (STRA_UINT)strlen(psz);
   uiFinalLen = uiSrcLen * uiCount;
 
   this->grow(uiFinalLen + 1, false);
@@ -643,10 +590,8 @@ void StringA::fill (const char* psz, uint uiCount)
 
 
 
-//---------------------------------------------------------------------------
-// pad
-//---------------------------------------------------------------------------
-void StringA::pad (const char c, uint uiDesiredLength)
+//------------------------------------------------------------------------------
+void StringA::pad (const char c, STRA_UINT uiDesiredLength)
 {
   if (m_uiLength >= uiDesiredLength)
     return;
@@ -658,16 +603,14 @@ void StringA::pad (const char c, uint uiDesiredLength)
   m_uiLength = uiDesiredLength;
 }
 
-//---------------------------------------------------------------------------
-// pad
-//---------------------------------------------------------------------------
-void StringA::pad (const char* psz, uint uiDesiredLength)
+//------------------------------------------------------------------------------
+void StringA::pad (const char* psz, STRA_UINT uiDesiredLength)
 {
-  uint  uiSrcLen;
-  uint  uiLenToFill;
+  STRA_UINT  uiSrcLen;
+  STRA_UINT  uiLenToFill;
   char* pDst;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   if (!psz)
     return;
 
@@ -676,7 +619,7 @@ void StringA::pad (const char* psz, uint uiDesiredLength)
 
   this->grow(uiDesiredLength + 1, true);
 
-  uiSrcLen    = (uint)strlen(psz);
+  uiSrcLen    = (STRA_UINT)strlen(psz);
   uiLenToFill = uiDesiredLength - m_uiLength;
   pDst        = m_pszData + m_uiLength;
 
@@ -686,7 +629,7 @@ void StringA::pad (const char* psz, uint uiDesiredLength)
     pDst        += uiSrcLen;
     uiLenToFill -= uiSrcLen;
   }
-  GLB_ASSERT(uiLenToFill < uiSrcLen);
+  STRA_ASSERT(uiLenToFill < uiSrcLen);
   memcpy(pDst, psz, uiLenToFill);
 
   m_pszData[uiDesiredLength] = 0;
@@ -696,15 +639,11 @@ void StringA::pad (const char* psz, uint uiDesiredLength)
 
 
 
-//---------------------------------------------------------------------------
-// mid
-//---------------------------------------------------------------------------
-StringA StringA::mid (uint uiOffset, uint uiLength) const
+//------------------------------------------------------------------------------
+StringA StringA::mid (STRA_UINT uiOffset, STRA_UINT uiLength) const
 {
-  uint    uiMyLen;
-  StringA strResult;
-
-  strResult.clear();
+  STRA_UINT uiMyLen;
+  StringA   strResult;
 
   uiMyLen = m_uiLength;
   if (!uiMyLen || (uiOffset >= uiMyLen))
@@ -718,12 +657,10 @@ StringA StringA::mid (uint uiOffset, uint uiLength) const
   return strResult;
 }
 
-//---------------------------------------------------------------------------
-// mid
-//---------------------------------------------------------------------------
-const char* StringA::mid (uint uiOffset, uint uiLength, StringA& strOutResult) const
+//------------------------------------------------------------------------------
+const char* StringA::mid (STRA_UINT uiOffset, STRA_UINT uiLength, StringA& strOutResult) const
 {
-  uint uiMyLen;
+  STRA_UINT uiMyLen;
 
   strOutResult.clear();
 
@@ -742,9 +679,7 @@ const char* StringA::mid (uint uiOffset, uint uiLength, StringA& strOutResult) c
 
 
 
-//---------------------------------------------------------------------------
-// substr
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 const char* StringA::substr (StringA& strOutResult, int nOffset, int nLength/*=0*/) const
 {
   strOutResult.clear();
@@ -753,26 +688,26 @@ const char* StringA::substr (StringA& strOutResult, int nOffset, int nLength/*=0
   {
     if (nLength > 0)
     {
-      return this->mid((uint)nOffset, (uint)nLength, strOutResult);
+      return this->mid((STRA_UINT)nOffset, (STRA_UINT)nLength, strOutResult);
     }
     else if (nLength == 0)
     {
-      return this->mid((uint)nOffset, m_uiLength, strOutResult);
+      return this->mid((STRA_UINT)nOffset, m_uiLength, strOutResult);
     }
     else
     {
       nLength = nOffset + -nLength;
-      if ((uint)nLength > m_uiLength)
+      if ((STRA_UINT)nLength > m_uiLength)
         nLength = (int)m_uiLength;
 
-      return this->mid((uint)nOffset, m_uiLength - (uint)nLength, strOutResult);
+      return this->mid((STRA_UINT)nOffset, m_uiLength - (STRA_UINT)nLength, strOutResult);
     }
   }
   else if (nOffset == 0)
   {
     if (nLength > 0)
     {
-      return this->left((uint)nLength, strOutResult);
+      return this->left((STRA_UINT)nLength, strOutResult);
     }
     else if (nLength == 0)
     {
@@ -782,33 +717,33 @@ const char* StringA::substr (StringA& strOutResult, int nOffset, int nLength/*=0
     else
     {
       nLength = -nLength;
-      if ((uint)nLength > m_uiLength)
+      if ((STRA_UINT)nLength > m_uiLength)
         nLength = (int)m_uiLength;
 
-      return this->left(m_uiLength - (uint)nLength, strOutResult);
+      return this->left(m_uiLength - (STRA_UINT)nLength, strOutResult);
     }
   }
   else // if (nOffset < 0)
   {
     nOffset = -nOffset;
-    if ((uint)nOffset >= m_uiLength)
+    if ((STRA_UINT)nOffset >= m_uiLength)
       return NULL;
 
     if (nLength > 0)
     {
-      return this->mid(m_uiLength - (uint)nOffset, (uint)nLength, strOutResult);
+      return this->mid(m_uiLength - (STRA_UINT)nOffset, (STRA_UINT)nLength, strOutResult);
     }
     else if (nLength == 0)
     {
-      return this->right((uint)nOffset, strOutResult);
+      return this->right((STRA_UINT)nOffset, strOutResult);
     }
     else
     {
       nLength = nOffset + -nLength;
-      if ((uint)nLength > m_uiLength)
+      if ((STRA_UINT)nLength > m_uiLength)
         nLength = (int)m_uiLength;
 
-      return this->mid(m_uiLength - (uint)nOffset, m_uiLength - (uint)nLength, strOutResult);
+      return this->mid(m_uiLength - (STRA_UINT)nOffset, m_uiLength - (STRA_UINT)nLength, strOutResult);
     }
   }
 }
@@ -816,9 +751,7 @@ const char* StringA::substr (StringA& strOutResult, int nOffset, int nLength/*=0
 
 
 
-//---------------------------------------------------------------------------
-// trimLeft
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::trimLeft (const char c)
 {
   int   nLastFound = -1;
@@ -833,12 +766,10 @@ void StringA::trimLeft (const char c)
     return;  // none found
 
   memmove(&m_pszData[0], &m_pszData[nLastFound + 1], size_t(m_uiLength - nLastFound));
-  m_uiLength -= (uint)nLastFound + 1;
+  m_uiLength -= (STRA_UINT)nLastFound + 1;
 }
 
-//---------------------------------------------------------------------------
-// trimLeft
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::trimLeft (const char* pszCharList)
 {
   int   nLastFound = -1;
@@ -867,12 +798,10 @@ void StringA::trimLeft (const char* pszCharList)
     return;
 
   memmove(&m_pszData[0], &m_pszData[nLastFound + 1], size_t(m_uiLength - nLastFound));
-  m_uiLength -= (uint)nLastFound + 1;
+  m_uiLength -= (STRA_UINT)nLastFound + 1;
 }
 
-//---------------------------------------------------------------------------
-// trimRight
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::trimRight (const char c)
 {
   char* p;
@@ -887,9 +816,7 @@ void StringA::trimRight (const char c)
   }
 }
 
-//---------------------------------------------------------------------------
-// trimRight
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::trimRight (const char* pszCharList)
 {
   char* p;
@@ -918,10 +845,8 @@ void StringA::trimRight (const char* pszCharList)
 
 
 
-//---------------------------------------------------------------------------
-// extractBool
-//---------------------------------------------------------------------------
-int StringA::extractBool (uint uiStartOffset/*=0*/) const
+//------------------------------------------------------------------------------
+int StringA::extractBool (STRA_UINT uiStartOffset/*=0*/) const
 {
   char* pszOffset;
   int   nValue;
@@ -931,15 +856,13 @@ int StringA::extractBool (uint uiStartOffset/*=0*/) const
   pszOffset = m_pszData + uiStartOffset;
 
   StringA::strIsBool(pszOffset, false, &nValue);
-  GLB_ASSERT((nValue >= -1) && (nValue <= 1));
+  STRA_ASSERT((nValue >= -1) && (nValue <= 1));
 
   return nValue;
 }
 
-//---------------------------------------------------------------------------
-// extractInt32
-//---------------------------------------------------------------------------
-int32 StringA::extractInt32 (uint uiStartOffset/*=0*/) const
+//------------------------------------------------------------------------------
+STRA_INT32 StringA::extractInt32 (STRA_UINT uiStartOffset/*=0*/) const
 {
   char* pszOffset;
 
@@ -950,14 +873,12 @@ int32 StringA::extractInt32 (uint uiStartOffset/*=0*/) const
   return atoi(pszOffset);
 }
 
-//---------------------------------------------------------------------------
-// extractInt32FromHex
-//---------------------------------------------------------------------------
-int32 StringA::extractInt32FromHex (uint uiStartOffset/*=0*/, uint uiMaxHexDigitsToHandle/*=8*/, bool* pbOutErrorOccurred/*=NULL*/) const
+//------------------------------------------------------------------------------
+STRA_INT32 StringA::extractInt32FromHex (STRA_UINT uiStartOffset/*=0*/, STRA_UINT uiMaxHexDigitsToHandle/*=8*/, bool* pbOutErrorOccurred/*=NULL*/) const
 {
-  int32 nReturn = 0;
+  STRA_INT32 nReturn = 0;
   char* p = m_pszData;
-  uint8 n;
+  STRA_UINT8 n;
   bool  bFirstLoop = true;
 
   // reset state
@@ -965,7 +886,7 @@ int32 StringA::extractInt32FromHex (uint uiStartOffset/*=0*/, uint uiMaxHexDigit
     *pbOutErrorOccurred = false;
 
   // skip to the starting offset
-  GLB_ASSERT(uiStartOffset < m_uiLength);
+  STRA_ASSERT(uiStartOffset < m_uiLength);
   if (uiStartOffset >= m_uiLength)
     goto __Error;
   p += uiStartOffset;
@@ -982,7 +903,7 @@ int32 StringA::extractInt32FromHex (uint uiStartOffset/*=0*/, uint uiMaxHexDigit
   for ( ; *p && uiMaxHexDigitsToHandle; ++p, --uiMaxHexDigitsToHandle)
   {
     n = StringA::charHexToInt(*p);
-    if (n == uint8(-1))
+    if (n == STRA_UINT8(-1))
       goto __Error;
 
     if (!bFirstLoop)
@@ -994,16 +915,14 @@ int32 StringA::extractInt32FromHex (uint uiStartOffset/*=0*/, uint uiMaxHexDigit
 
   return nReturn;
 
-__Error :
+__Error:
   if (pbOutErrorOccurred)
     *pbOutErrorOccurred = true;
   return 0;
 }
 
-//---------------------------------------------------------------------------
-// extractInt64
-//---------------------------------------------------------------------------
-int64 StringA::extractInt64 (uint uiStartOffset/*=0*/) const
+//------------------------------------------------------------------------------
+STRA_INT64 StringA::extractInt64 (STRA_UINT uiStartOffset/*=0*/) const
 {
   char* pszOffset;
 
@@ -1011,17 +930,15 @@ int64 StringA::extractInt64 (uint uiStartOffset/*=0*/) const
     return -1;
   pszOffset = m_pszData + uiStartOffset;
 
-#ifdef GLB_COMPILER_MSVC
+#ifdef STRA_COMPILER_MSVC
   return _atoi64(pszOffset);
 #else
   return atoll(pszOffset);
 #endif
 }
 
-//---------------------------------------------------------------------------
-// extractDouble
-//---------------------------------------------------------------------------
-double StringA::extractDouble (uint uiStartOffset/*=0*/) const
+//------------------------------------------------------------------------------
+double StringA::extractDouble (STRA_UINT uiStartOffset/*=0*/) const
 {
   char* pszOffset;
 
@@ -1035,12 +952,10 @@ double StringA::extractDouble (uint uiStartOffset/*=0*/) const
 
 
 
-//---------------------------------------------------------------------------
-// formatV
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::formatV (const char* pszFormat, va_list arglist)
 {
-  #if defined(GLB_COMPILER_MSVC) && (GLB_COMPILER_VERSION >= 1300)
+  #if defined(STRA_COMPILER_MSVC) && (STRA_COMPILER_VERSION >= 1300)
   {
     int nLen;
     int nRes;
@@ -1049,16 +964,16 @@ void StringA::formatV (const char* pszFormat, va_list arglist)
     if (nLen < 0)
       return;
 
-    this->grow((uint)nLen + 1, false);
-    GLB_ASSERT(m_uiAllocSize >= (uint)nLen + 1);
+    this->grow((STRA_UINT)nLen + 1, false);
+    STRA_ASSERT(m_uiAllocSize >= (STRA_UINT)nLen + 1);
 
     nRes = vsnprintf(m_pszData, (size_t)m_uiAllocSize, pszFormat, arglist);
-    GLB_ASSERT(nRes == nLen);
-    GLB_ASSERT(m_pszData[nRes] == 0);
+    STRA_ASSERT(nRes == nLen);
+    STRA_ASSERT(m_pszData[nRes] == 0);
 
-    m_uiLength = (uint)nRes;
+    m_uiLength = (STRA_UINT)nRes;
   }
-  #elif defined(GLB_COMPILER_GCC) && ( (__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 1)) )
+  #elif defined(STRA_COMPILER_GCC) && ( (__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 1)) )
   {
     // this vsnprintf() behavior requires requires glibc version >= 2.1
     // it seems to be also supported by the libc on macosx
@@ -1071,14 +986,14 @@ void StringA::formatV (const char* pszFormat, va_list arglist)
     if (nLen < 0)
       return;
 
-    this->grow((uint)nLen + 1, false);
-    GLB_ASSERT(m_uiAllocSize >= (uint)nLen + 1);
+    this->grow((STRA_UINT)nLen + 1, false);
+    STRA_ASSERT(m_uiAllocSize >= (STRA_UINT)nLen + 1);
 
     nRes = vsnprintf(m_pszData, (size_t)m_uiAllocSize, pszFormat, arglist);
-    GLB_ASSERT(nRes == nLen);
-    GLB_ASSERT(m_pszData[nRes] == 0);
+    STRA_ASSERT(nRes == nLen);
+    STRA_ASSERT(m_pszData[nRes] == 0);
 
-    m_uiLength = (uint)nRes;
+    m_uiLength = (STRA_UINT)nRes;
   }
   #else // *too* old compilers fall down here, seriously, you should upgrade :)
   {
@@ -1091,14 +1006,14 @@ void StringA::formatV (const char* pszFormat, va_list arglist)
     // c_uiMaxAllocSize but please keep those values as much reasonable as
     // you can.  - jcl
 
-    static const uint c_auiGrowSizes[]     = { 32, 64, 128, 256, 512, 1024, 2048 }; // arbitrary values
-    static const int  c_nLastGrowSizeIndex = (sizeof(c_auiGrowSizes) / sizeof(uint)) - 1;
-    static const uint c_uiMaxAllocSize     = 0x10000; // 64K bytes *formatting* should be enough for everyone, even for java style "coders"
+    static const STRA_UINT c_auiGrowSizes[]     = { 32, 64, 128, 256, 512, 1024, 2048 }; // arbitrary values
+    static const int       c_nLastGrowSizeIndex = (sizeof(c_auiGrowSizes) / sizeof(STRA_UINT)) - 1;
+    static const STRA_UINT c_uiMaxAllocSize     = 0x10000; // 64K bytes sprintf() should be enough for everyone!
 
     int  nRes;
     int  nGrowIndex = -1;
-    uint uiGrowSize;
-    uint uiAllocSize;
+    STRA_UINT uiGrowSize;
+    STRA_UINT uiAllocSize;
 
     nRes = vsnprintf(m_pszData, (size_t)m_uiAllocSize, pszFormat, arglist);
     while (nRes < 0)
@@ -1106,14 +1021,14 @@ void StringA::formatV (const char* pszFormat, va_list arglist)
       // check max alloc size
       if (m_uiAllocSize >= c_uiMaxAllocSize)
       {
-        uint uiLen;
+        STRA_UINT uiLen;
 
         m_uiLength = m_uiAllocSize - 1;
         m_pszData[m_uiLength] = 0;
 
         // be sure length corresponds to the real length of string
-        uiLen = (uint)strlen(m_pszData);
-        GLB_ASSERT(uiLen <= m_uiLength);
+        uiLen = (STRA_UINT)strlen(m_pszData);
+        STRA_ASSERT(uiLen <= m_uiLength);
         if (uiLen < m_uiLength)
         {
           m_uiLength = uiLen;
@@ -1134,14 +1049,14 @@ void StringA::formatV (const char* pszFormat, va_list arglist)
 
       // grow buffer
       this->grow(uiAllocSize, false);
-      GLB_ASSERT(m_uiAllocSize >= uiAllocSize);
+      STRA_ASSERT(m_uiAllocSize >= uiAllocSize);
 
       // format
       nRes = vsnprintf(m_pszData, (size_t)m_uiAllocSize, pszFormat, arglist);
     }
 
-    GLB_ASSERT(strlen(m_pszData) == (size_t)nRes);
-    m_uiLength = (uint)nRes;
+    STRA_ASSERT(strlen(m_pszData) == (size_t)nRes);
+    m_uiLength = (STRA_UINT)nRes;
   }
   #endif
 }
@@ -1149,15 +1064,13 @@ void StringA::formatV (const char* pszFormat, va_list arglist)
 
 
 
-//---------------------------------------------------------------------------
-// formatAppendBytesToHuman
-//---------------------------------------------------------------------------
-int StringA::formatAppendBytesToHuman (uint uiBytes, const char* pszPrefix/*=""*/, const char* pszSuffix/*=""*/)
+//------------------------------------------------------------------------------
+int StringA::formatAppendBytesToHuman (STRA_UINT uiBytes, const char* pszPrefix/*=""*/, const char* pszSuffix/*=""*/)
 {
   int   nUnit = 1;
   float rValue;
 
-  while ((nUnit <= 4) && (uint(1 << (nUnit * 10)) < uiBytes))
+  while ((nUnit <= 4) && (STRA_UINT(1 << (nUnit * 10)) < uiBytes))
     ++nUnit;
   --nUnit;
 
@@ -1167,15 +1080,13 @@ int StringA::formatAppendBytesToHuman (uint uiBytes, const char* pszPrefix/*=""*
   return nUnit;
 }
 
-//---------------------------------------------------------------------------
-// formatAppendBytesToHuman64
-//---------------------------------------------------------------------------
-int StringA::formatAppendBytesToHuman64 (uint64 uiBytes, const char* pszPrefix/*=""*/, const char* pszSuffix/*=""*/)
+//------------------------------------------------------------------------------
+int StringA::formatAppendBytesToHuman64 (STRA_UINT64 uiBytes, const char* pszPrefix/*=""*/, const char* pszSuffix/*=""*/)
 {
   int    nUnit = 1;
   double rValue;
 
-  while ((nUnit <= 4) && (uint64(1 << (nUnit * 10)) < uiBytes))
+  while ((nUnit <= 4) && (STRA_UINT64(1 << (nUnit * 10)) < uiBytes))
     ++nUnit;
   --nUnit;
 
@@ -1188,22 +1099,20 @@ int StringA::formatAppendBytesToHuman64 (uint64 uiBytes, const char* pszPrefix/*
 
 
 
-//---------------------------------------------------------------------------
-// urlEscape
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::urlEscape (StringA& strOutEscaped) const
 {
-  uint32 Ix;
-  uchar* pSrc;
-  uchar* pDst;
-  uint32 uiRequiredLen = m_uiLength;
+  STRA_UINT32 Ix;
+  STRA_UCHAR* pSrc;
+  STRA_UCHAR* pDst;
+  STRA_UINT32 uiRequiredLen = m_uiLength;
 
-  pSrc = (uchar*)m_pszData;
-  pDst = (uchar*)strOutEscaped.acquireBuffer(uiRequiredLen + 1, false);
+  pSrc = (STRA_UCHAR*)m_pszData;
+  pDst = (STRA_UCHAR*)strOutEscaped.acquireBuffer(uiRequiredLen + 1, false);
 
   for (Ix = 0; *pSrc; ++pSrc)
   {
-    // trick from libcurl :
+    // trick from libcurl:
     // portable character check (remember EBCDIC), do not use isalnum()
     // because its behavior is altered by the current locale.
     switch (*pSrc)
@@ -1224,7 +1133,7 @@ void StringA::urlEscape (StringA& strOutEscaped) const
         pDst[Ix++] = *pSrc;
         break;
 
-      default :
+      default:
         uiRequiredLen += 2;  // %XX
 
         // do we need to reallocate ?
@@ -1233,12 +1142,12 @@ void StringA::urlEscape (StringA& strOutEscaped) const
           pDst[Ix] = 0; // resize() method makes use of strcpy()
           strOutEscaped.releaseBuffer(Ix);
           uiRequiredLen += STRING_GROW_SIZE; // StringA already handles padded (re)allocates (see the resize() method) but be sure we do not reallocate to often
-          pDst = (uchar*)strOutEscaped.acquireBuffer(uiRequiredLen + 1, true);
+          pDst = (STRA_UCHAR*)strOutEscaped.acquireBuffer(uiRequiredLen + 1, true);
         }
 
         // convert character
         snprintf((char*)&pDst[Ix], 4, "%%%02X", *pSrc); // could be 3 on windows (so it will not append non-needed null char), but glibc requires 4
-        GLB_ASSERT(strlen((char*)&pDst[Ix]) == 3);
+        STRA_ASSERT(strlen((char*)&pDst[Ix]) == 3);
         Ix += 3;
         break;
     }
@@ -1248,18 +1157,16 @@ void StringA::urlEscape (StringA& strOutEscaped) const
   strOutEscaped.releaseBuffer(Ix);
 }
 
-//---------------------------------------------------------------------------
-// urlUnescape
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::urlUnescape (StringA& strOutUnescaped) const
 {
-  uint32 Ix;
-  uchar* pSrc;
-  uchar* pDst;
-  char   szHex[4];
+  STRA_UINT32 Ix;
+  STRA_UCHAR* pSrc;
+  STRA_UCHAR* pDst;
+  char szHex[4];
 
-  pSrc = (uchar*)m_pszData;
-  pDst = (uchar*)strOutUnescaped.acquireBuffer(m_uiLength + 1, false);
+  pSrc = (STRA_UCHAR*)m_pszData;
+  pDst = (STRA_UCHAR*)strOutUnescaped.acquireBuffer(m_uiLength + 1, false);
 
   for (Ix = 0; *pSrc; ++Ix)
   {
@@ -1271,7 +1178,7 @@ void StringA::urlUnescape (StringA& strOutUnescaped) const
       szHex[1] = pSrc[2];
       szHex[2] = 0;
 
-      pDst[Ix] = (uchar)strtol((char*)&szHex, &pDummy, 16); // we can safely force-cast, returned value will never exceed 255
+      pDst[Ix] = (STRA_UCHAR)strtol((char*)&szHex, &pDummy, 16); // we can safely force-cast, returned value will never exceed 255
       pSrc    += 3;
     }
     else
@@ -1284,18 +1191,14 @@ void StringA::urlUnescape (StringA& strOutUnescaped) const
   strOutUnescaped.releaseBuffer(Ix);
 }
 
-//---------------------------------------------------------------------------
-// urlEscape
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::urlEscape (void)
 {
   StringA strSrc(*this);
   strSrc.urlEscape(*this);
 }
 
-//---------------------------------------------------------------------------
-// urlUnescape
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::urlUnescape (void)
 {
   StringA strSrc(*this);
@@ -1305,16 +1208,15 @@ void StringA::urlUnescape (void)
 
 
 
-//---------------------------------------------------------------------------
-// ansiToUtf8
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+#if 0
 void StringA::ansiToUtf8 (bool bComputeExactLengthFirst/*=false*/)
 {
-  uint    uiNewLength;
-  uchar*  pSrc;
-  StringA strSrc;
-  uchar*  pDst;
-  uchar   c;
+  STRA_UINT   uiNewLength;
+  STRA_UCHAR* pSrc;
+  StringA     strSrc;
+  STRA_UCHAR* pDst;
+  STRA_UCHAR  c;
 
   if (!m_pszData[0])
     return;
@@ -1323,7 +1225,7 @@ void StringA::ansiToUtf8 (bool bComputeExactLengthFirst/*=false*/)
   if (bComputeExactLengthFirst)
   {
     uiNewLength = m_uiLength;
-    for (pSrc = (uchar*)m_pszData; *pSrc; ++pSrc)
+    for (pSrc = (STRA_UCHAR*)m_pszData; *pSrc; ++pSrc)
     {
       if (*pSrc >= 128)
         ++uiNewLength;
@@ -1339,11 +1241,11 @@ void StringA::ansiToUtf8 (bool bComputeExactLengthFirst/*=false*/)
 
   // grow destination buffer
   this->grow(uiNewLength + 1, false);
-  GLB_ASSERT(!m_pszData[0] && !m_uiLength);
+  STRA_ASSERT(!m_pszData[0] && !m_uiLength);
 
   // convert
-  pSrc = (uchar*)strSrc.m_pszData;
-  pDst = (uchar*)m_pszData;
+  pSrc = (STRA_UCHAR*)strSrc.m_pszData;
+  pDst = (STRA_UCHAR*)m_pszData;
   while ((c = *pDst++))
   {
     if (c <= 127)
@@ -1352,38 +1254,38 @@ void StringA::ansiToUtf8 (bool bComputeExactLengthFirst/*=false*/)
     }
     else
     {
-      GLB_ASSERT((192 + (c / 64)) != 0);
-      GLB_ASSERT((128 + (c % 64)) != 0);
+      STRA_ASSERT((192 + (c / 64)) != 0);
+      STRA_ASSERT((128 + (c % 64)) != 0);
 
       *pDst++ = 192 + (c / 64);
       *pDst++ = 128 + (c % 64);
     }
   }
   *pDst = 0;
-  m_uiLength = uint((char*)pDst - m_pszData);
-  GLB_ASSERT(m_uiLength == strlen(m_pszData));
+  m_uiLength = STRA_UINT((char*)pDst - m_pszData);
+  STRA_ASSERT(m_uiLength == strlen(m_pszData));
 }
+#endif
 
-//---------------------------------------------------------------------------
-// utf8ToAnsi
-//---------------------------------------------------------------------------
-void StringA::utf8ToAnsi (const uchar* pSourceUtf8String)
+//------------------------------------------------------------------------------
+#if 0
+void StringA::utf8ToAnsi (const STRA_UCHAR* pSourceUtf8String)
 {
   // http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
 
-  uint   uiNewLength;
-  uchar* pSrc;
-  uchar* pDst;
-  uchar  c;
+  STRA_UINT   uiNewLength;
+  STRA_UCHAR* pSrc;
+  STRA_UCHAR* pDst;
+  STRA_UCHAR  c;
 
-  GLB_ASSERT(pSourceUtf8String && pSourceUtf8String[0]);
+  STRA_ASSERT(pSourceUtf8String && pSourceUtf8String[0]);
   if (!pSourceUtf8String)
     return;
   if (!pSourceUtf8String[0])
     return;
 
   // compute destination length
-  pSrc        = (uchar*)pSourceUtf8String;
+  pSrc        = (STRA_UCHAR*)pSourceUtf8String;
   uiNewLength = 0;
   while ((c = *pSrc++))
   {
@@ -1391,15 +1293,15 @@ void StringA::utf8ToAnsi (const uchar* pSourceUtf8String)
 
     if (c >= 0x80)
     {
-      if ((c & 0xE0) == 0xC0)      // (c & 11100000b) == 11000000b : 2 bytes long, 11 bits of data
+      if ((c & 0xE0) == 0xC0)      // (c & 11100000b) == 11000000b: 2 bytes long, 11 bits of data
         ++pSrc;
-      else if ((c & 0xF0) == 0xE0) // (c & 11110000b) == 11100000b : 3 bytes long, 16 bits of data
+      else if ((c & 0xF0) == 0xE0) // (c & 11110000b) == 11100000b: 3 bytes long, 16 bits of data
         pSrc += 2;
-      else if ((c & 0xF8) == 0xF0) // (c & 11111000b) == 11110000b : 4 bytes long, 21 bits of data
+      else if ((c & 0xF8) == 0xF0) // (c & 11111000b) == 11110000b: 4 bytes long, 21 bits of data
         pSrc += 3;
-      else if ((c & 0xFC) == 0xF8) // (c & 11111100b) == 11111000b : 5 bytes long, 26 bits of data
+      else if ((c & 0xFC) == 0xF8) // (c & 11111100b) == 11111000b: 5 bytes long, 26 bits of data
         pSrc += 4;
-      else if ((c & 0xFE) == 0xFC) // (c & 11111110b) == 11111100b : 6 bytes long, 31 bits of data
+      else if ((c & 0xFE) == 0xFC) // (c & 11111110b) == 11111100b: 6 bytes long, 31 bits of data
         pSrc += 5;
     }
   }
@@ -1408,36 +1310,36 @@ void StringA::utf8ToAnsi (const uchar* pSourceUtf8String)
   this->grow(uiNewLength + 1, false);
 
   // convert
-  pSrc = (uchar*)pSourceUtf8String;
-  pDst = (uchar*)m_pszData;
+  pSrc = (STRA_UCHAR*)pSourceUtf8String;
+  pDst = (STRA_UCHAR*)m_pszData;
   while ((c = *pSrc++))
   {
     if (c >= 0x80)
     {
-      if ((c & 0xE0) == 0xC0)      // (c & 11100000b) == 11000000b : 2 bytes long, 11 bits of data
+      if ((c & 0xE0) == 0xC0)      // (c & 11100000b) == 11000000b: 2 bytes long, 11 bits of data
       {
-        uint16 uiWide = ((c & 0x1F) << 6) | (*pSrc++ & 0x3F);
+        STRA_UINT16 uiWide = ((c & 0x1F) << 6) | (*pSrc++ & 0x3F);
         if (uiWide > 0xff)
           c = '?';
         else
-          c = (uchar)uiWide;
+          c = (STRA_UCHAR)uiWide;
       }
-      else if ((c & 0xF0) == 0xE0) // (c & 11110000b) == 11100000b : 3 bytes long, 16 bits of data
+      else if ((c & 0xF0) == 0xE0) // (c & 11110000b) == 11100000b: 3 bytes long, 16 bits of data
       {
         c     = '?';
         pSrc += 2;
       }
-      else if ((c & 0xF8) == 0xF0) // (c & 11111000b) == 11110000b : 4 bytes long, 21 bits of data
+      else if ((c & 0xF8) == 0xF0) // (c & 11111000b) == 11110000b: 4 bytes long, 21 bits of data
       {
         c     = '?';
         pSrc += 3;
       }
-      else if ((c & 0xFC) == 0xF8) // (c & 11111100b) == 11111000b : 5 bytes long, 26 bits of data
+      else if ((c & 0xFC) == 0xF8) // (c & 11111100b) == 11111000b: 5 bytes long, 26 bits of data
       {
         c     = '?';
         pSrc += 4;
       }
-      else if ((c & 0xFE) == 0xFC) // (c & 11111110b) == 11111100b : 6 bytes long, 31 bits of data
+      else if ((c & 0xFE) == 0xFC) // (c & 11111110b) == 11111100b: 6 bytes long, 31 bits of data
       {
         c     = '?';
         pSrc += 5;
@@ -1447,17 +1349,16 @@ void StringA::utf8ToAnsi (const uchar* pSourceUtf8String)
     *pDst++ = c;
   }
   *pDst = 0;
-  m_uiLength = uint(pDst - (uchar*)m_pszData);
-  GLB_ASSERT(m_uiLength == (uint)strlen(m_pszData));
+  m_uiLength = STRA_UINT(pDst - (STRA_UCHAR*)m_pszData);
+  STRA_ASSERT(m_uiLength == (STRA_UINT)strlen(m_pszData));
 }
+#endif
 
 
 
 
-//---------------------------------------------------------------------------
-// replace
-//---------------------------------------------------------------------------
-void StringA::replace (const char cOld, const char cNew, uint uiStartOffset/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::replace (const char cOld, const char cNew, STRA_UINT uiStartOffset/*=0*/)
 {
   if (uiStartOffset >= m_uiLength)
     return;
@@ -1469,10 +1370,8 @@ void StringA::replace (const char cOld, const char cNew, uint uiStartOffset/*=0*
   }
 }
 
-//---------------------------------------------------------------------------
-// replaceI
-//---------------------------------------------------------------------------
-void StringA::replaceI (const char cOld, const char cNew, uint uiStartOffset/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::replaceI (const char cOld, const char cNew, STRA_UINT uiStartOffset/*=0*/)
 {
   if (uiStartOffset >= m_uiLength)
     return;
@@ -1484,27 +1383,25 @@ void StringA::replaceI (const char cOld, const char cNew, uint uiStartOffset/*=0
   }
 }
 
-//---------------------------------------------------------------------------
-// replace
-//---------------------------------------------------------------------------
-void StringA::replace (const char* pszOld, const char* pszNew, uint uiStartOffset/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::replace (const char* pszOld, const char* pszNew, STRA_UINT uiStartOffset/*=0*/)
 {
   int  nOldLen;
   int  nNewLen;
   int  nSwaps;
-  uint Ix;
+  STRA_UINT Ix;
 
-  GLB_ASSERT(pszOld);
+  STRA_ASSERT(pszOld);
   if (!pszOld)
     return;
-  GLB_ASSERT(pszNew);
+  STRA_ASSERT(pszNew);
   if (!pszNew)
     return;
   if (uiStartOffset >= m_uiLength)
     return;
 
   nOldLen = (int)strlen(pszOld);
-  if (uiStartOffset > (m_uiLength - (uint)nOldLen))
+  if (uiStartOffset > (m_uiLength - (STRA_UINT)nOldLen))
     return;
   nNewLen = (int)strlen(pszNew);
 
@@ -1512,10 +1409,10 @@ void StringA::replace (const char* pszOld, const char* pszNew, uint uiStartOffse
   nSwaps = 0;
   for (Ix = uiStartOffset; Ix < m_uiLength; ++Ix)
   {
-    if (StringA::strCompareCount((char*)&m_pszData[Ix], pszOld, (uint)nOldLen) == 0)
+    if (StringA::strCompareCount((char*)&m_pszData[Ix], pszOld, (STRA_UINT)nOldLen) == 0)
     {
       ++nSwaps;
-      Ix += uint(nOldLen - 1);
+      Ix += STRA_UINT(nOldLen - 1);
     }
   }
 
@@ -1523,9 +1420,9 @@ void StringA::replace (const char* pszOld, const char* pszNew, uint uiStartOffse
   if (nSwaps > 0)
   {
     StringA strOldData(*this, (m_uiLength-uiStartOffset), uiStartOffset);
-    uint Jx;
+    STRA_UINT Jx;
 
-    this->grow(m_uiLength + uint((nNewLen - nOldLen) * nSwaps) + 2, (uiStartOffset > 0));
+    this->grow(m_uiLength + STRA_UINT((nNewLen - nOldLen) * nSwaps) + 2, (uiStartOffset > 0));
     if (uiStartOffset > 0)
     {
       m_pszData[uiStartOffset] = 0;
@@ -1534,11 +1431,11 @@ void StringA::replace (const char* pszOld, const char* pszNew, uint uiStartOffse
 
     for (Ix = 0, Jx = uiStartOffset; Ix < strOldData.length(); ++Ix)
     {
-      if (StringA::strCompareCount((char*)&strOldData[Ix], pszOld, (uint)nOldLen) == 0)
+      if (StringA::strCompareCount((char*)&strOldData[Ix], pszOld, (STRA_UINT)nOldLen) == 0)
       {
         memcpy(m_pszData + Jx, pszNew, nNewLen);
-        Ix += uint(nOldLen - 1);
-        Jx += uint(nNewLen);
+        Ix += STRA_UINT(nOldLen - 1);
+        Jx += STRA_UINT(nNewLen);
       }
       else
       {
@@ -1547,32 +1444,30 @@ void StringA::replace (const char* pszOld, const char* pszNew, uint uiStartOffse
     }
 
     m_pszData[Jx] = 0;
-    GLB_ASSERT(Jx == (uint)strlen(m_pszData));
+    STRA_ASSERT(Jx == (STRA_UINT)strlen(m_pszData));
     m_uiLength = Jx;
   }
 }
 
-//---------------------------------------------------------------------------
-// replaceI
-//---------------------------------------------------------------------------
-void StringA::replaceI (const char* pszOld, const char* pszNew, uint uiStartOffset/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::replaceI (const char* pszOld, const char* pszNew, STRA_UINT uiStartOffset/*=0*/)
 {
   int  nOldLen;
   int  nNewLen;
   int  nSwaps;
-  uint Ix;
+  STRA_UINT Ix;
 
-  GLB_ASSERT(pszOld);
+  STRA_ASSERT(pszOld);
   if (!pszOld)
     return;
-  GLB_ASSERT(pszNew);
+  STRA_ASSERT(pszNew);
   if (!pszNew)
     return;
   if (uiStartOffset >= m_uiLength)
     return;
 
   nOldLen = (int)strlen(pszOld);
-  if (uiStartOffset > (m_uiLength - (uint)nOldLen))
+  if (uiStartOffset > (m_uiLength - (STRA_UINT)nOldLen))
     return;
   nNewLen = (int)strlen(pszNew);
 
@@ -1580,10 +1475,10 @@ void StringA::replaceI (const char* pszOld, const char* pszNew, uint uiStartOffs
   nSwaps = 0;
   for (Ix = uiStartOffset; Ix < m_uiLength; ++Ix)
   {
-    if (StringA::strCompareCountI((char*)&m_pszData[Ix], pszOld, (uint)nOldLen) == 0)
+    if (StringA::strCompareCountI((char*)&m_pszData[Ix], pszOld, (STRA_UINT)nOldLen) == 0)
     {
       ++nSwaps;
-      Ix += uint(nOldLen - 1);
+      Ix += STRA_UINT(nOldLen - 1);
     }
   }
 
@@ -1591,9 +1486,9 @@ void StringA::replaceI (const char* pszOld, const char* pszNew, uint uiStartOffs
   if (nSwaps > 0)
   {
     StringA strOldData(*this, (m_uiLength-uiStartOffset), uiStartOffset);
-    uint Jx;
+    STRA_UINT Jx;
 
-    this->grow(m_uiLength + uint((nNewLen - nOldLen) * nSwaps) + 2, (uiStartOffset > 0));
+    this->grow(m_uiLength + STRA_UINT((nNewLen - nOldLen) * nSwaps) + 2, (uiStartOffset > 0));
     if (uiStartOffset > 0)
     {
       m_pszData[uiStartOffset] = 0;
@@ -1602,11 +1497,11 @@ void StringA::replaceI (const char* pszOld, const char* pszNew, uint uiStartOffs
 
     for (Ix = 0, Jx = uiStartOffset; Ix < strOldData.length(); ++Ix)
     {
-      if (StringA::strCompareCountI((char*)&strOldData[Ix], pszOld, (uint)nOldLen) == 0)
+      if (StringA::strCompareCountI((char*)&strOldData[Ix], pszOld, (STRA_UINT)nOldLen) == 0)
       {
         memcpy(m_pszData + Jx, pszNew, nNewLen);
-        Ix += uint(nOldLen - 1);
-        Jx += uint(nNewLen);
+        Ix += STRA_UINT(nOldLen - 1);
+        Jx += STRA_UINT(nNewLen);
       }
       else
       {
@@ -1615,7 +1510,7 @@ void StringA::replaceI (const char* pszOld, const char* pszNew, uint uiStartOffs
     }
 
     m_pszData[Jx] = 0;
-    GLB_ASSERT(Jx == (uint)strlen(m_pszData));
+    STRA_ASSERT(Jx == (STRA_UINT)strlen(m_pszData));
     m_uiLength = Jx;
   }
 }
@@ -1623,10 +1518,8 @@ void StringA::replaceI (const char* pszOld, const char* pszNew, uint uiStartOffs
 
 
 
-//---------------------------------------------------------------------------
-// explode
-//---------------------------------------------------------------------------
-void StringA::explode (StringAVec& vecOutParts, const char* pszSeparator, uint uiMaxParts/*=0*/, bool bKeepEmptyParts/*=false*/) const
+//------------------------------------------------------------------------------
+void StringA::explode (StringAVec& vecOutParts, const char* pszSeparator, STRA_UINT uiMaxParts/*=0*/, bool bKeepEmptyParts/*=false*/) const
 {
   int nStart = 0;
   int nPos;
@@ -1634,7 +1527,7 @@ void StringA::explode (StringAVec& vecOutParts, const char* pszSeparator, uint u
 
   vecOutParts.clear();
 
-  GLB_ASSERT(pszSeparator);
+  STRA_ASSERT(pszSeparator);
   if (!pszSeparator || !pszSeparator[0])
     return;
 
@@ -1646,7 +1539,7 @@ void StringA::explode (StringAVec& vecOutParts, const char* pszSeparator, uint u
   do
   {
     nPos = this->find(pszSeparator, nStart);
-    if ((nPos < 0) || ((uiMaxParts > 0) && ((uint)vecOutParts.size() == (uiMaxParts - 1))))
+    if ((nPos < 0) || ((uiMaxParts > 0) && ((STRA_UINT)vecOutParts.size() == (uiMaxParts - 1))))
     {
       // copy the remaining part of the string
       vecOutParts.push_back(this->substr(nStart));
@@ -1666,28 +1559,26 @@ void StringA::explode (StringAVec& vecOutParts, const char* pszSeparator, uint u
       vecOutParts.push_back(this->substr(nStart, nPos-nStart));
       nStart = nPos + nSeparatorLen;
 
-      if (bKeepEmptyParts && ((uint)nStart >= m_uiLength))
+      if (bKeepEmptyParts && ((STRA_UINT)nStart >= m_uiLength))
         vecOutParts.push_back(StringA());
     }
 
     // seek up to the next wanted part of the haystack
     if (!bKeepEmptyParts)
     {
-      while (StringA::strCompareCount((char*)&m_pszData[nStart], pszSeparator, (uint)nSeparatorLen) == 0)
+      while (StringA::strCompareCount((char*)&m_pszData[nStart], pszSeparator, (STRA_UINT)nSeparatorLen) == 0)
       {
         nStart += nSeparatorLen;
-        if ((uint)nStart >= m_uiLength)
+        if ((STRA_UINT)nStart >= m_uiLength)
           return;
       }
     }
   }
-  while ((uint)nStart < m_uiLength);
+  while ((STRA_UINT)nStart < m_uiLength);
 }
 
-//---------------------------------------------------------------------------
-// explodeWithOneOf
-//---------------------------------------------------------------------------
-void StringA::explodeWithOneOf (StringAVec& vecOutParts, const char* pszSeparators, uint uiMaxParts/*=0*/, bool bKeepEmptyParts/*=false*/) const
+//------------------------------------------------------------------------------
+void StringA::explodeWithOneOf (StringAVec& vecOutParts, const char* pszSeparators, STRA_UINT uiMaxParts/*=0*/, bool bKeepEmptyParts/*=false*/) const
 {
   int nStart = 0;
   int nPos;
@@ -1695,7 +1586,7 @@ void StringA::explodeWithOneOf (StringAVec& vecOutParts, const char* pszSeparato
 
   vecOutParts.clear();
 
-  GLB_ASSERT(pszSeparators);
+  STRA_ASSERT(pszSeparators);
   if (!pszSeparators || !pszSeparators[0])
     return;
 
@@ -1707,7 +1598,7 @@ void StringA::explodeWithOneOf (StringAVec& vecOutParts, const char* pszSeparato
   do
   {
     nPos = this->findFirstOf(pszSeparators, nStart, nSeparators);
-    if ((nPos < 0) || ((uiMaxParts > 0) && ((uint)vecOutParts.size() == (uiMaxParts - 1))))
+    if ((nPos < 0) || ((uiMaxParts > 0) && ((STRA_UINT)vecOutParts.size() == (uiMaxParts - 1))))
     {
       // copy the remaining part of the string
       vecOutParts.push_back(this->substr(nStart));
@@ -1736,27 +1627,25 @@ void StringA::explodeWithOneOf (StringAVec& vecOutParts, const char* pszSeparato
         return;
     }
   }
-  while ((uint)nStart < m_uiLength);
+  while ((STRA_UINT)nStart < m_uiLength);
 }
 
-//---------------------------------------------------------------------------
-// split
-//---------------------------------------------------------------------------
-void StringA::split (const char* pszSeparator/*="\r\n"*/, uint uiChunkLen/*=76*/, uint uiStartOffset/*=0*/)
+//------------------------------------------------------------------------------
+void StringA::split (const char* pszSeparator/*="\r\n"*/, STRA_UINT uiChunkLen/*=76*/, STRA_UINT uiStartOffset/*=0*/)
 {
-  uint uiSepLen;
-  uint uiLen;
+  STRA_UINT uiSepLen;
+  STRA_UINT uiLen;
 
-  GLB_ASSERT(pszSeparator && pszSeparator[0]);
+  STRA_ASSERT(pszSeparator && pszSeparator[0]);
   if (!pszSeparator)
     return;
   if (!pszSeparator[0])
     return;
-  GLB_ASSERT(uiChunkLen >= 1);
-  GLB_ASSERT(uiStartOffset >= 0);
-  GLB_ASSERT(uiStartOffset < m_uiLength);
+  STRA_ASSERT(uiChunkLen >= 1);
+  STRA_ASSERT(uiStartOffset >= 0);
+  STRA_ASSERT(uiStartOffset < m_uiLength);
 
-  uiSepLen = (uint)strlen(pszSeparator);
+  uiSepLen = (STRA_UINT)strlen(pszSeparator);
 
   // evaluate the grow size to gain some time while inserting separators
   uiLen = ((m_uiLength - uiStartOffset) / uiChunkLen) * uiSepLen;
@@ -1764,7 +1653,7 @@ void StringA::split (const char* pszSeparator/*="\r\n"*/, uint uiChunkLen/*=76*/
 
   // split
   uiLen = 0;
-  for (uint Ix = uiStartOffset; Ix < m_uiLength; )
+  for (STRA_UINT Ix = uiStartOffset; Ix < m_uiLength; )
   {
     if (uiLen < uiChunkLen)
     {
@@ -1773,7 +1662,7 @@ void StringA::split (const char* pszSeparator/*="\r\n"*/, uint uiChunkLen/*=76*/
     }
     else
     {
-      GLB_ASSERT(uiLen == uiChunkLen);
+      STRA_ASSERT(uiLen == uiChunkLen);
 
       this->insert(pszSeparator, Ix);
 
@@ -1786,17 +1675,15 @@ void StringA::split (const char* pszSeparator/*="\r\n"*/, uint uiChunkLen/*=76*/
 
 
 
-//---------------------------------------------------------------------------
-// implode
-//---------------------------------------------------------------------------
-void StringA::implode (const StringAVec& vecParts, const char* pszGlue)
+//------------------------------------------------------------------------------
+void StringA::join (const StringAVec& vecParts, const char* pszGlue)
 {
   static const char c_szEmptyGlue[] = "";
 
   StringAVecCIt itPart;
   StringAVecCIt itPartEnd = vecParts.end();
-  uint uiGlueLen;
-  uint uiFinalLen;
+  STRA_UINT uiGlueLen;
+  STRA_UINT uiFinalLen;
 
   if (vecParts.empty())
   {
@@ -1805,10 +1692,10 @@ void StringA::implode (const StringAVec& vecParts, const char* pszGlue)
     return;
   }
 
-  GLB_ASSERT(pszGlue);
+  STRA_ASSERT(pszGlue);
   if (!pszGlue)
     pszGlue = (char*)&c_szEmptyGlue;
-  uiGlueLen = (uint)strlen(pszGlue);
+  uiGlueLen = (STRA_UINT)strlen(pszGlue);
 
   // compute final string length
   uiFinalLen = 0;
@@ -1825,10 +1712,10 @@ void StringA::implode (const StringAVec& vecParts, const char* pszGlue)
     m_uiLength = 0;
     m_pszData[0] = 0;
   }
-  GLB_ASSERT(m_uiLength == 0);
-  GLB_ASSERT(m_pszData[0] == 0);
+  STRA_ASSERT(m_uiLength == 0);
+  STRA_ASSERT(m_pszData[0] == 0);
 
-  // implode vector
+  // join vector
   for (itPart = vecParts.begin() ; itPart != itPartEnd; ++itPart)
   {
     this->append(*itPart);
@@ -1840,18 +1727,16 @@ void StringA::implode (const StringAVec& vecParts, const char* pszGlue)
 
 
 
-//---------------------------------------------------------------------------
-// pathAppend
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathAppend (const char* pszPathElement)
 {
-  uint uiTrailLen;
+  STRA_UINT uiTrailLen;
 
-  GLB_ASSERT(pszPathElement);
+  STRA_ASSERT(pszPathElement);
   if (!pszPathElement || !pszPathElement[0])
     return;
 
-  uiTrailLen = (uint)strlen(pszPathElement);
+  uiTrailLen = (STRA_UINT)strlen(pszPathElement);
 
   if ((m_uiLength > 0) && !this->pathHasTrailingSeparator() && !StringA::charIsPathSeparator(pszPathElement[0]))
   {
@@ -1861,7 +1746,7 @@ void StringA::pathAppend (const char* pszPathElement)
     memcpy(&m_pszData[m_uiLength], pszPathElement, uiTrailLen + 1);
     m_uiLength += uiTrailLen;
 
-    GLB_ASSERT((uint)strlen(m_pszData) == m_uiLength);
+    STRA_ASSERT((STRA_UINT)strlen(m_pszData) == m_uiLength);
   }
   else
   {
@@ -1870,13 +1755,11 @@ void StringA::pathAppend (const char* pszPathElement)
     memcpy(&m_pszData[m_uiLength], pszPathElement, uiTrailLen + 1);
     m_uiLength += uiTrailLen;
 
-    GLB_ASSERT((uint)strlen(m_pszData) == m_uiLength);
+    STRA_ASSERT((STRA_UINT)strlen(m_pszData) == m_uiLength);
   }
 }
 
-//---------------------------------------------------------------------------
-// pathExtractRoot
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathExtractRoot (StringA& strDest) const
 {
   StringAVec vecPath;
@@ -1888,9 +1771,7 @@ void StringA::pathExtractRoot (StringA& strDest) const
     strDest = vecPath[0];
 }
 
-//---------------------------------------------------------------------------
-// pathExtractRoot
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 StringA StringA::pathExtractRoot (void) const
 {
   StringA strRes;
@@ -1898,23 +1779,21 @@ StringA StringA::pathExtractRoot (void) const
   return strRes;
 }
 
-//---------------------------------------------------------------------------
-// pathExtractDirectory
-//
-// I tried to be POSIX compliant (i.e.: have the same behavior than libc's
-// dirname() function) :
-//
-// Examples :
-// - '/usr/bin' returns '/usr'
-// - '/usr/bin/' returns '/usr'
-// - '/' returns '/'
-// - '.' returns '.'
-// - '..' returns '.'
-// - 'c:/' returns 'c:/'
-// - 'c:' returns 'c:'
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathExtractDirectory (StringA& strDest) const
 {
+  // I tried to be POSIX compliant (i.e.: have the same behavior than libc's
+  // dirname() function):
+  //
+  // Examples:
+  // - '/usr/bin' returns '/usr'
+  // - '/usr/bin/' returns '/usr'
+  // - '/' returns '/'
+  // - '.' returns '.'
+  // - '..' returns '.'
+  // - 'c:/' returns 'c:/'
+  // - 'c:' returns 'c:'
+
   int Ix;
 
   strDest.clear();
@@ -1954,9 +1833,7 @@ void StringA::pathExtractDirectory (StringA& strDest) const
   }
 }
 
-//---------------------------------------------------------------------------
-// pathExtractDirectory
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 StringA StringA::pathExtractDirectory (void) const
 {
   StringA strRes;
@@ -1964,21 +1841,19 @@ StringA StringA::pathExtractDirectory (void) const
   return strRes;
 }
 
-//---------------------------------------------------------------------------
-// pathExtractName
-//
-// Examples :
-// - '/usr/bin' returns 'bin'
-// - '/usr/bin/' returns 'bin'
-// - '/' returns ''
-// - '///////' returns '/'
-// - '.' returns ''
-// - '..' returns ''
-// - 'c:/' returns ''
-// - 'c:' returns ''
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathExtractName (StringA& strDest) const
 {
+  // Examples:
+  // - '/usr/bin' returns 'bin'
+  // - '/usr/bin/' returns 'bin'
+  // - '/' returns ''
+  // - '///////' returns '/'
+  // - '.' returns ''
+  // - '..' returns ''
+  // - 'c:/' returns ''
+  // - 'c:' returns ''
+
   int nStart;
   int nEnd;
 
@@ -2007,7 +1882,7 @@ void StringA::pathExtractName (StringA& strDest) const
 
   if (nEnd == 0)
   {
-    GLB_ASSERT(StringA::charIsPathSeparator(m_pszData[0]) == false); // this should never happen
+    STRA_ASSERT(StringA::charIsPathSeparator(m_pszData[0]) == false); // this should never happen
 
     if (m_pszData[0] == '.')
       return;
@@ -2026,16 +1901,14 @@ void StringA::pathExtractName (StringA& strDest) const
   {
     if (StringA::charIsPathSeparator(m_pszData[nStart]))
     {
-      GLB_ASSERT(nStart + 1 != nEnd);
-      this->mid(uint(nStart + 1), uint(nEnd - nStart), strDest);
+      STRA_ASSERT(nStart + 1 != nEnd);
+      this->mid(STRA_UINT(nStart + 1), STRA_UINT(nEnd - nStart), strDest);
       return;
     }
   }
 }
 
-//---------------------------------------------------------------------------
-// pathExtractName
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 StringA StringA::pathExtractName (void) const
 {
   StringA strRes;
@@ -2043,22 +1916,20 @@ StringA StringA::pathExtractName (void) const
   return strRes;
 }
 
-//---------------------------------------------------------------------------
-// pathExtractTitle
-//
-// Examples :
-// - '/usr/bin' returns ''
-// - '/usr/bin.ext' returns 'bin'
-// - '/usr/bin/' returns ''
-// - '/usr/bin.ext/' returns ''
-// - '/' returns ''
-// - '.' returns ''
-// - '..' returns ''
-// - 'c:/' returns ''
-// - 'c:' returns ''
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathExtractTitle (StringA& strDest) const
 {
+  // Examples:
+  // - '/usr/bin' returns ''
+  // - '/usr/bin.ext' returns 'bin'
+  // - '/usr/bin/' returns ''
+  // - '/usr/bin.ext/' returns ''
+  // - '/' returns ''
+  // - '.' returns ''
+  // - '..' returns ''
+  // - 'c:/' returns ''
+  // - 'c:' returns ''
+
   strDest.clear();
 
   if (m_uiLength <= 0)
@@ -2079,9 +1950,7 @@ void StringA::pathExtractTitle (StringA& strDest) const
   }
 }
 
-//---------------------------------------------------------------------------
-// pathExtractTitle
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 StringA StringA::pathExtractTitle (void) const
 {
   StringA strRes;
@@ -2089,13 +1958,12 @@ StringA StringA::pathExtractTitle (void) const
   return strRes;
 }
 
-//---------------------------------------------------------------------------
-// pathExtractExtension
-//---------------------------------------------------------------------------
-void StringA::pathExtractExtension (StringA& strDest) const
+//------------------------------------------------------------------------------
+void StringA::pathExtractExtension (bool bAll, StringA& strDest) const
 {
-  strDest.clear();
+  int iPos = -1;
 
+  strDest.clear();
   if (m_uiLength <= 0)
     return;
 
@@ -2103,29 +1971,61 @@ void StringA::pathExtractExtension (StringA& strDest) const
   {
     if (StringA::charIsPathSeparator(m_pszData[Ix]))
     {
-      return;
+      if (bAll)
+        break;
+      else
+        return;
     }
     else if (m_pszData[Ix] == '.')
     {
-      this->right(m_uiLength-Ix-1, strDest);
-      return;
+      if (bAll)
+      {
+        iPos = Ix;
+      }
+      else
+      {
+        this->right(m_uiLength-((STRA_UINT32)Ix)+1, strDest);
+        return;
+      }
     }
+  }
+
+  if (iPos != -1)
+  {
+    this->right(m_uiLength-((STRA_UINT32)iPos)+1, strDest);
+    return;
   }
 }
 
-//---------------------------------------------------------------------------
-// pathExtractExtension
-//---------------------------------------------------------------------------
-StringA StringA::pathExtractExtension (void) const
+//------------------------------------------------------------------------------
+StringA StringA::pathExtractExtension (bool bAll) const
 {
   StringA strRes;
-  this->pathExtractExtension(strRes);
+  this->pathExtractExtension(bAll, strRes);
   return strRes;
 }
 
-//---------------------------------------------------------------------------
-// pathStripDirectory
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+void StringA::pathExtractExtensionV (bool bAll, StringAVec& vecDest) const
+{
+  StringA strRes;
+
+  vecDest.clear();
+  this->pathExtractExtension(bAll, strRes);
+  if (strRes.isEmpty())
+    return;
+  this->explode(vecDest, ".");
+}
+
+//------------------------------------------------------------------------------
+StringAVec StringA::pathExtractExtensionV (bool bAll) const
+{
+  StringAVec vecDest;
+  this->pathExtractExtensionV(bAll, vecDest);
+  return vecDest;
+}
+
+//------------------------------------------------------------------------------
 void StringA::pathStripDirectory (void)
 {
   if (m_uiLength <= 0)
@@ -2137,7 +2037,7 @@ void StringA::pathStripDirectory (void)
     {
       ++Ix;
 
-      if ((uint)Ix >= m_uiLength)
+      if ((STRA_UINT)Ix >= m_uiLength)
       {
         m_pszData[0] = 0;
         m_uiLength = 0;
@@ -2147,8 +2047,8 @@ void StringA::pathStripDirectory (void)
         m_uiLength -= Ix;
         memmove(m_pszData, &m_pszData[Ix], m_uiLength + 1);
 
-        GLB_ASSERT(m_pszData[m_uiLength] == 0);
-        GLB_ASSERT((uint)strlen(m_pszData) == m_uiLength);
+        STRA_ASSERT(m_pszData[m_uiLength] == 0);
+        STRA_ASSERT((STRA_UINT)strlen(m_pszData) == m_uiLength);
       }
 
       return;
@@ -2159,9 +2059,7 @@ void StringA::pathStripDirectory (void)
   // so there was nothing to do
 }
 
-//---------------------------------------------------------------------------
-// pathStripName
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathStripName (void)
 {
   if (m_uiLength <= 0)
@@ -2185,9 +2083,7 @@ void StringA::pathStripName (void)
   m_uiLength = 0;
 }
 
-//---------------------------------------------------------------------------
-// pathStripExtension
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathStripExtension (void)
 {
   if (m_uiLength <= 0)
@@ -2202,19 +2098,32 @@ void StringA::pathStripExtension (void)
     else if (m_pszData[Ix] == '.')
     {
       m_pszData[Ix] = 0;
-      m_uiLength = (uint)Ix;
+      m_uiLength = (STRA_UINT)Ix;
 
-      GLB_ASSERT(m_pszData[m_uiLength] == 0);
-      GLB_ASSERT((uint)strlen(m_pszData) == m_uiLength);
+      STRA_ASSERT(m_pszData[m_uiLength] == 0);
+      STRA_ASSERT((STRA_UINT)strlen(m_pszData) == m_uiLength);
 
       return;
     }
   }
 }
 
-//---------------------------------------------------------------------------
-// pathExplode
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+bool StringA::pathHasSeparators (void) const
+{
+  char* p = m_pszData;
+
+  do
+  {
+    if (StringA::charIsPathSeparator(*p))
+      return true;
+  }
+  while (*++p);
+
+  return false;
+}
+
+//------------------------------------------------------------------------------
 void StringA::pathExplode (StringAVec& vecPath) const
 {
   char* pStart;
@@ -2229,7 +2138,7 @@ void StringA::pathExplode (StringAVec& vecPath) const
   if (this->pathIsWindowsNetwork())
   {
     // when path is like "//server/share/dir/file.ext"
-    // we must return : "//server/share" "dir" "file.ext"
+    // we must return: "//server/share" "dir" "file.ext"
 
     StringA strTemp;
     int     nSepCount = 0;
@@ -2249,7 +2158,7 @@ void StringA::pathExplode (StringAVec& vecPath) const
         break;
     }
 
-    strTemp.copyCount(m_pszData, uint(pEnd - m_pszData));
+    strTemp.copyCount(m_pszData, STRA_UINT(pEnd - m_pszData));
     while (strTemp.pathStripTrailingSeparator()) { ; }
     vecPath.push_back(strTemp);
 
@@ -2266,7 +2175,7 @@ void StringA::pathExplode (StringAVec& vecPath) const
   }
   else if (StringA::charIsPathSeparator(m_pszData[0]))
   {
-    GLB_ASSERT(StringA::charIsPathSeparator(m_pszData[1]) == false);
+    STRA_ASSERT(StringA::charIsPathSeparator(m_pszData[1]) == false);
     vecPath.push_back(StringA(m_pszData[0]));
 
     pszData = m_pszData + 1;
@@ -2280,7 +2189,7 @@ void StringA::pathExplode (StringAVec& vecPath) const
   {
     if ((*pEnd == 0) || StringA::charIsPathSeparator(*pEnd))
     {
-      StringA strTemp(pStart, uint(pEnd - pStart));
+      StringA strTemp(pStart, STRA_UINT(pEnd - pStart));
 
       if (!strTemp.isEmpty())
         vecPath.push_back(strTemp);
@@ -2293,12 +2202,10 @@ void StringA::pathExplode (StringAVec& vecPath) const
   }
 }
 
-//---------------------------------------------------------------------------
-// pathCheckExtension
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::pathCheckExtension (const char* pszExtension) const
 {
-  GLB_ASSERT(pszExtension);
+  STRA_ASSERT(pszExtension);
   if (!pszExtension || !pszExtension[0])
     return false;
 
@@ -2316,12 +2223,10 @@ bool StringA::pathCheckExtension (const char* pszExtension) const
   return false;
 }
 
-//---------------------------------------------------------------------------
-// pathChangeExtension
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void StringA::pathChangeExtension (const char* pszExtension)
 {
-  GLB_ASSERT(pszExtension);
+  STRA_ASSERT(pszExtension);
   if (!pszExtension || !pszExtension[0])
     return;
 
@@ -2344,7 +2249,7 @@ void StringA::pathChangeExtension (const char* pszExtension)
     {
       ++Ix;
       m_pszData[Ix] = 0;
-      m_uiLength = (uint)Ix;
+      m_uiLength = (STRA_UINT)Ix;
 
       this->append(pszExtension);
 
@@ -2353,31 +2258,26 @@ void StringA::pathChangeExtension (const char* pszExtension)
   }
 }
 
-//---------------------------------------------------------------------------
-// pathIsAbsolute
-//---------------------------------------------------------------------------
-bool StringA::pathIsAbsolute (void) const
+//------------------------------------------------------------------------------
+bool StringA::pathIsAbsoluteWin (void) const
 {
-  if (m_uiLength <= 0)
-    return false;
-
-  // validates "/" or "\\server" or "\\server\" or "\\server\share" or "\\server\share\"
-  if (StringA::charIsPathSeparator(m_pszData[0]))
-    return true;
-
-  // validates "c:"
-  if ((m_uiLength >= 2) && (m_pszData[1] == ':'))
-  {
-    if (((*m_pszData >= 'a') && (*m_pszData <= 'z')) || ((*m_pszData >= 'A') && (*m_pszData <= 'Z')))
+    if (m_uiLength >= 2 && m_pszData[1] == ':' && StringA::charIsWindowsDriveLetter(*m_pszData))
       return true;
-  }
+    if (this->pathIsWindowsNetwork())
+      return true;
 
+    return false;
+}
+
+//------------------------------------------------------------------------------
+bool StringA::pathIsAbsoluteUnix (void) const
+{
+  if (m_uiLength >= 1 && StringA::charIsPathSeparator(*m_pszData))
+    return true;
   return false;
 }
 
-//---------------------------------------------------------------------------
-// pathIsRoot
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::pathIsRoot (void) const
 {
   if (m_uiLength <= 0)
@@ -2392,7 +2292,7 @@ bool StringA::pathIsRoot (void) const
   else if (m_pszData[1] == ':') // m_uiLength is > 1
   {
     // validates "c:" or "c:/" or "c:\"
-    if (((m_pszData[0] >= 'a') && (m_pszData[0] <= 'z')) || ((m_pszData[0] >= 'A') && (m_pszData[0] <= 'Z')))
+    if (StringA::charIsWindowsDriveLetter(*m_pszData))
     {
       if (m_uiLength == 2)
         return true;
@@ -2400,7 +2300,7 @@ bool StringA::pathIsRoot (void) const
         return true;
     }
   }
-  else if ((m_pszData[0] == '\\') && (m_pszData[1] == '\\')) // m_uiLength is > 1
+  else if (StringA::charIsPathSeparator(m_pszData[0]) && StringA::charIsPathSeparator(m_pszData[1]))
   {
     StringAVec vecParts;
 
@@ -2413,27 +2313,19 @@ bool StringA::pathIsRoot (void) const
   return false;
 }
 
-//---------------------------------------------------------------------------
-// pathExpand
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::pathExpand (void)
 {
-  if (!this->pathIsAbsolute())
-  {
-    GLB_ASSERT(0 && "Path must be absolute ! pathExpand() is only here to resolve symlinks and expand '.' and '..' sequences.");
-    return false;
-  }
-
-  #ifdef GLB_PLATFORM_WINDOWS
+  #ifdef STRA_PLATFORM_WINDOWS
   {
     char  szBuffer[1024];
     DWORD dwLen;
 
-    dwLen = ::GetFullPathNameA(m_pszData, sizeof(szBuffer), (char*)&szBuffer, 0);
+    dwLen = GetFullPathNameA(m_pszData, sizeof(szBuffer), (char*)&szBuffer, 0);
     if (dwLen == 0)
     {
-      __Error_GetFullPathName :
-      GLB_LOGERR("Error while calling GetFullPathName(\"%s\") ! Error %u : %s", m_pszData, System::lastError(), System::lastErrorString());
+      __Error_GetFullPathName:
+      STRA_LOGERR("Error while calling GetFullPathName(\"%s\")! Error %u", m_pszData, GetLastError());
       return false;
     }
     else if (dwLen >= sizeof(szBuffer))
@@ -2445,16 +2337,16 @@ bool StringA::pathExpand (void)
 
       this->grow(dwLen + 1, false);
 
-      dwLen = ::GetFullPathNameA((char*)&szBuffer, m_uiAllocSize, m_pszData, 0);
+      dwLen = GetFullPathNameA((char*)&szBuffer, m_uiAllocSize, m_pszData, 0);
       if (dwLen == 0)
       {
-        GLB_ASSERT(0 && "Weird !");
+        STRA_ASSERT(0); // weird!
         goto __Error_GetFullPathName;
       }
 
-      GLB_ASSERT(dwLen < m_uiAllocSize);
+      STRA_ASSERT(dwLen < m_uiAllocSize);
       m_uiLength = dwLen;
-      GLB_ASSERT(m_uiLength == (uint)strlen(m_pszData));
+      STRA_ASSERT(m_uiLength == (STRA_UINT)strlen(m_pszData));
     }
     else
     {
@@ -2462,36 +2354,32 @@ bool StringA::pathExpand (void)
 
       memcpy(m_pszData, (char*)&szBuffer, dwLen + 1);
       m_uiLength = dwLen;
-      GLB_ASSERT(m_uiLength == (uint)strlen(m_pszData));
+      STRA_ASSERT(m_uiLength == (STRA_UINT)strlen(m_pszData));
     }
   }
   #else
   {
     char szBuffer[PATH_MAX];
-    uint uiLen;
+    STRA_UINT uiLen;
 
     if (!realpath(m_pszData, (char*)&szBuffer))
     {
-      GLB_LOGERR("Error while trying to expand given path \"%s\" ! Error %u : %s", m_pszData, System::lastError(), System::lastErrorString());
+      STRA_LOGERR("Error while trying to expand given path \"%s\"! Error %u: %s", m_pszData, errno(), strerror(errno()));
       return false;
     }
 
-    // since realpath() is buggy and *not* secure, and if by chance there
-    // was not already a buffer overflow due to the realpath(), be sure there
-    // is a nul-terminating character *inside* buffer.
-    // if we find it, we are sure there was no problem, otherwise, be sure
-    // the caller is advised about corrupted memory. this is the best we can
-    // do here...
-    // maybe there is an alternative to realpath() here but i don't know it,
-    // please let me know :)  - jcl
+    // because realpath() is buggy and *not* secure, ensure we got a null
+    // character inside the buffer or warn the outside world that memory may
+    // have been corrupt otherwise.
+    // is there an alternative to realpath()? - jcl
     for (uiLen = 0; uiLen < sizeof(szBuffer); ++uiLen)
     {
       if (!szBuffer[uiLen])
-        break;  // ok, we've found one inside buffer !
+        break;
     }
     if (uiLen >= sizeof(szBuffer))
     {
-      GLB_LOGERR("Error while trying to expand given path \"%s\" ! Your memory may be corrupted by a call to realpath().", m_pszData);
+      STRA_LOGERR("Error while trying to expand given path \"%s\"! Your memory may be corrupted by a call to realpath().", m_pszData);
       return false;
     }
 
@@ -2505,18 +2393,14 @@ bool StringA::pathExpand (void)
   return true;
 }
 
-//---------------------------------------------------------------------------
-// pathCompare
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::pathCompare (const char* pszPath, bool bCaseSensitive) const
 {
-  GLB_ASSERT(pszPath);
+  STRA_ASSERT(pszPath);
   return StringA::strComparePath(m_pszData, pszPath, bCaseSensitive);
 }
 
-//---------------------------------------------------------------------------
-// pathIsInDirectory
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::pathIsInDirectory (const char* pszDirPath, bool bCaseSensitive) const
 {
   StringA    strParent;
@@ -2524,7 +2408,7 @@ bool StringA::pathIsInDirectory (const char* pszDirPath, bool bCaseSensitive) co
   StringAVec vecParent;
   StringAVec vecChild;
 
-  GLB_ASSERT(pszDirPath);
+  STRA_ASSERT(pszDirPath);
 
   strParent = pszDirPath;
   strChild  = *this;
@@ -2534,12 +2418,12 @@ bool StringA::pathIsInDirectory (const char* pszDirPath, bool bCaseSensitive) co
   if (!strChild.pathExpand())
     return false;
 
-  //GLB_ASSERT(FileSystem::isDirectory(strParent));
+  //STRA_ASSERT(FileSystem::isDirectory(strParent));
 
   strParent.pathExplode(vecParent);
   strChild.pathExplode(vecChild);
 
-  // since we are sure both path were expanded correctly (even symlinks), if
+  // since we are sure both paths were expanded correctly (even symlinks), if
   // parent path is longer than child path, it is obvious that path is not in
   // the given directory.
   if (vecParent.size() >= vecChild.size())
@@ -2568,9 +2452,7 @@ bool StringA::pathIsInDirectory (const char* pszDirPath, bool bCaseSensitive) co
 
 
 
-//---------------------------------------------------------------------------
-// StrCompare
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strCompare (const char* psz1, const char* psz2)
 {
   int c1, c2, d;
@@ -2589,10 +2471,8 @@ int StringA::strCompare (const char* psz1, const char* psz2)
   return 0;
 }
 
-//---------------------------------------------------------------------------
-// StrCompareCount
-//---------------------------------------------------------------------------
-int StringA::strCompareCount (const char* psz1, const char* psz2, uint uiMaxCount)
+//------------------------------------------------------------------------------
+int StringA::strCompareCount (const char* psz1, const char* psz2, STRA_UINT uiMaxCount)
 {
   int c1, c2, d;
 
@@ -2613,9 +2493,7 @@ int StringA::strCompareCount (const char* psz1, const char* psz2, uint uiMaxCoun
   return 0;
 }
 
-//---------------------------------------------------------------------------
-// StrCompareI
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strCompareI (const char* psz1, const char* psz2)
 {
   int c1, c2, d;
@@ -2650,10 +2528,8 @@ int StringA::strCompareI (const char* psz1, const char* psz2)
   return 0;
 }
 
-//---------------------------------------------------------------------------
-// StrCompareCountI
-//---------------------------------------------------------------------------
-int StringA::strCompareCountI (const char* psz1, const char* psz2, uint uiMaxCount)
+//------------------------------------------------------------------------------
+int StringA::strCompareCountI (const char* psz1, const char* psz2, STRA_UINT uiMaxCount)
 {
   int c1, c2, d;
 
@@ -2690,13 +2566,11 @@ int StringA::strCompareCountI (const char* psz1, const char* psz2, uint uiMaxCou
   return 0;
 }
 
-//---------------------------------------------------------------------------
-// StrComparePath
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strComparePath (const char* pszPath1, const char* pszPath2, bool bCaseSensitive)
 {
-  GLB_ASSERT(pszPath1);
-  GLB_ASSERT(pszPath2);
+  STRA_ASSERT(pszPath1);
+  STRA_ASSERT(pszPath2);
 
   StringA str1(pszPath1);
   StringA str2(pszPath2);
@@ -2712,18 +2586,16 @@ int StringA::strComparePath (const char* pszPath1, const char* pszPath2, bool bC
 
 
 
-//---------------------------------------------------------------------------
-// StrIsBool
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::strIsBool (const char* psz, bool bStrict/*=false*/, int* pnOutValue/*=NULL*/)
 {
-  // accepted boolean strings (case insensitive) :
+  // accepted boolean strings (case insensitive):
   // 0, 1, false, true, no, yes, off, on
 
   char* p;
   bool  bValue;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   p = (char*)psz;
   if (!*p)
     return false;
@@ -2848,22 +2720,20 @@ bool StringA::strIsBool (const char* psz, bool bStrict/*=false*/, int* pnOutValu
   }
 
 
-__Invalid :
+__Invalid:
   if (pnOutValue)
     *pnOutValue = -1;
   return false;
 }
 
-//---------------------------------------------------------------------------
-// StrIsInt
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::strIsInt (const char* psz, bool bStrict/*=false*/)
 {
-  // format of an integer string : [whitespace] [sign] [digits] [whitespace|nl|\0]
+  // format of an integer string: [whitespace] [sign] [digits] [whitespace|nl|\0]
 
   char* p;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   p = (char*)psz;
   if (!*p)
     return false;
@@ -2875,7 +2745,8 @@ bool StringA::strIsInt (const char* psz, bool bStrict/*=false*/)
       ++p;
   }
 
-  // handle first character which is a special case because of the eventual +/- sign
+  // handle first character which is a special case
+  // because of the eventual +/- sign
   if ((*p == '-') || (*p == '+'))
     ++p;
 
@@ -2892,19 +2763,17 @@ bool StringA::strIsInt (const char* psz, bool bStrict/*=false*/)
   return false;
 }
 
-//---------------------------------------------------------------------------
-// StrIsFloat
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::strIsFloat (const char* psz, bool bStrict/*=false*/)
 {
-  // format of a floating point string :
+  // format of a floating point string:
   // [whitespace] [sign] [digits] [.digits] [ {d | D | e | E }[sign]digits] {whitespace|nl|\0}
   // "if no digits appear before the decimal point, at least one must appear after the decimal point."
 
   char* p;
   bool  bMantissaNeeded;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   p = (char*)psz;
   if (!*p)
     return false;
@@ -2937,7 +2806,7 @@ bool StringA::strIsFloat (const char* psz, bool bStrict/*=false*/)
     return true;
 
   // [.digits] - mantissa (required only if there was no main part)
-  __Mantissa :
+  __Mantissa:
   if (bMantissaNeeded)
   {
     if ((*p < '0') || (*p > '9'))
@@ -2977,14 +2846,12 @@ bool StringA::strIsFloat (const char* psz, bool bStrict/*=false*/)
   return false;
 }
 
-//---------------------------------------------------------------------------
-// StrIsFullOfDigits
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::strIsFullOfDigits (const char* psz)
 {
   char* p;
 
-  GLB_ASSERT(psz);
+  STRA_ASSERT(psz);
   p = (char*)psz;
 
   // there must be at least one digit
@@ -3006,9 +2873,7 @@ bool StringA::strIsFullOfDigits (const char* psz)
 
 
 
-//---------------------------------------------------------------------------
-// StrFindFirstOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindFirstOf (const char* pszHaystack, const char cNeedle, bool bCaseSensitive, int nStartOffset/*=0*/, int nHaystackLength/*=-1*/)
 {
   int nPos;
@@ -3019,7 +2884,7 @@ int StringA::strFindFirstOf (const char* pszHaystack, const char cNeedle, bool b
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
@@ -3045,9 +2910,7 @@ int StringA::strFindFirstOf (const char* pszHaystack, const char cNeedle, bool b
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindFirstOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindFirstOf (const char* pszHaystack, const char* pszNeedles, bool bCaseSensitive, int nStartOffset/*=0*/, int nHaystackLength/*=-1*/, int nNeedlesLength/*=-1*/)
 {
   int nPos;
@@ -3061,7 +2924,7 @@ int StringA::strFindFirstOf (const char* pszHaystack, const char* pszNeedles, bo
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
@@ -3093,9 +2956,7 @@ int StringA::strFindFirstOf (const char* pszHaystack, const char* pszNeedles, bo
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindFirstNotOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindFirstNotOf (const char* pszHaystack, const char cNeedless, bool bCaseSensitive, int nStartOffset/*=0*/, int nHaystackLength/*=-1*/)
 {
   int nPos;
@@ -3106,7 +2967,7 @@ int StringA::strFindFirstNotOf (const char* pszHaystack, const char cNeedless, b
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
@@ -3132,9 +2993,7 @@ int StringA::strFindFirstNotOf (const char* pszHaystack, const char cNeedless, b
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindFirstNotOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindFirstNotOf (const char* pszHaystack, const char* pszNeedless, bool bCaseSensitive, int nStartOffset/*=0*/, int nHaystackLength/*=-1*/, int nNeedlessLength/*=-1*/)
 {
   int  nPos;
@@ -3149,7 +3008,7 @@ int StringA::strFindFirstNotOf (const char* pszHaystack, const char* pszNeedless
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
@@ -3191,9 +3050,7 @@ int StringA::strFindFirstNotOf (const char* pszHaystack, const char* pszNeedless
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindLastOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindLastOf (const char* pszHaystack, const char cNeedle, bool bCaseSensitive, int nStartOffset/*=-1*/, int nHaystackLength/*=-1*/)
 {
   int nPos;
@@ -3204,14 +3061,14 @@ int StringA::strFindLastOf (const char* pszHaystack, const char cNeedle, bool bC
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if (nStartOffset == -1)
     nStartOffset = nHaystackLength - 1;
   else if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
 
-  GLB_ASSERT(nEndOffset <= nStartOffset);
+  STRA_ASSERT(nEndOffset <= nStartOffset);
 
   for (nPos = nStartOffset; nPos >= nEndOffset; --nPos)
   {
@@ -3230,9 +3087,7 @@ int StringA::strFindLastOf (const char* pszHaystack, const char cNeedle, bool bC
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindLastOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindLastOf (const char* pszHaystack, const char* pszNeedles, bool bCaseSensitive, int nStartOffset/*=-1*/, int nHaystackLength/*=-1*/, int nNeedlesLength/*=-1*/)
 {
   int nPos;
@@ -3246,14 +3101,14 @@ int StringA::strFindLastOf (const char* pszHaystack, const char* pszNeedles, boo
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if (nStartOffset == -1)
     nStartOffset = nHaystackLength - 1;
   else if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
 
-  GLB_ASSERT(nEndOffset <= nStartOffset);
+  STRA_ASSERT(nEndOffset <= nStartOffset);
 
   if (nNeedlesLength < 0)
     nNeedlesLength = (int)strlen(pszNeedles);
@@ -3278,9 +3133,7 @@ int StringA::strFindLastOf (const char* pszHaystack, const char* pszNeedles, boo
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindLastNotOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindLastNotOf (const char* pszHaystack, const char cNeedless, bool bCaseSensitive, int nStartOffset/*=-1*/, int nHaystackLength/*=-1*/)
 {
   int nPos;
@@ -3291,14 +3144,14 @@ int StringA::strFindLastNotOf (const char* pszHaystack, const char cNeedless, bo
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if (nStartOffset == -1)
     nStartOffset = nHaystackLength - 1;
   else if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
 
-  GLB_ASSERT(nEndOffset <= nStartOffset);
+  STRA_ASSERT(nEndOffset <= nStartOffset);
 
   for (nPos = nStartOffset; nPos >= nEndOffset; --nPos)
   {
@@ -3317,9 +3170,7 @@ int StringA::strFindLastNotOf (const char* pszHaystack, const char cNeedless, bo
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFindLastNotOf
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFindLastNotOf (const char* pszHaystack, const char* pszNeedless, bool bCaseSensitive, int nStartOffset/*=-1*/, int nHaystackLength/*=-1*/, int nNeedlessLength/*=-1*/)
 {
   int  nPos;
@@ -3334,14 +3185,14 @@ int StringA::strFindLastNotOf (const char* pszHaystack, const char* pszNeedless,
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if (nStartOffset == -1)
     nStartOffset = nHaystackLength - 1;
   else if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
 
-  GLB_ASSERT(nEndOffset <= nStartOffset);
+  STRA_ASSERT(nEndOffset <= nStartOffset);
 
   if (nNeedlessLength < 0)
     nNeedlessLength = (int)strlen(pszNeedless);
@@ -3379,9 +3230,7 @@ int StringA::strFindLastNotOf (const char* pszHaystack, const char* pszNeedless,
 
 
 
-//---------------------------------------------------------------------------
-// StrFind
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFind (const char* pszHaystack, const char cNeedle, bool bCaseSensitive, int nStartOffset/*=0*/, int nEndOffset/*=-1*/, int nHaystackLength/*=-1*/)
 {
   int nPos;
@@ -3391,7 +3240,7 @@ int StringA::strFind (const char* pszHaystack, const char cNeedle, bool bCaseSen
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
     return -1;
@@ -3418,9 +3267,7 @@ int StringA::strFind (const char* pszHaystack, const char cNeedle, bool bCaseSen
   return -1;
 }
 
-//---------------------------------------------------------------------------
-// StrFind
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int StringA::strFind (const char* pszHaystack, const char* pszNeedle, bool bCaseSensitive, int nStartOffset/*=0*/, int nEndOffset/*=-1*/, int nHaystackLength/*=-1*/)
 {
   int nPos;
@@ -3433,11 +3280,11 @@ int StringA::strFind (const char* pszHaystack, const char* pszNeedle, bool bCase
 
   if (nHaystackLength < 0)
     nHaystackLength = (int)strlen(pszHaystack);
-  GLB_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
+  STRA_ASSERT(nHaystackLength <= (int)strlen(pszHaystack));
 
   if ((nStartOffset < 0) || (nStartOffset >= nHaystackLength))
   {
-    GLB_ASSERT(0);
+    STRA_ASSERT(0);
     return -1;
   }
 
@@ -3475,9 +3322,7 @@ int StringA::strFind (const char* pszHaystack, const char* pszNeedle, bool bCase
 
 
 
-//---------------------------------------------------------------------------
-// StrMatch
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 bool StringA::strMatch (const char* pszHaystack, const char* pszPattern, bool bCaseSensitive)
 {
   StringA strTemp;
@@ -3494,8 +3339,8 @@ bool StringA::strMatch (const char* pszHaystack, const char* pszPattern, bool bC
 
       if ((*pszPattern == '[') && (*(pszPattern+1) != '['))
       {
-        GLB_LOGWARN("This kind of pattern \"*[...]\" will not work properly !");
-        GLB_ASSERT(0);
+        STRA_LOGWARN("This kind of pattern \"*[...]\" will not work properly!");
+        STRA_ASSERT(0);
       }
 
       for (Ix = 0; *pszPattern; Ix++)
@@ -3515,7 +3360,7 @@ bool StringA::strMatch (const char* pszHaystack, const char* pszPattern, bool bC
         if (nIndex < 0)
           return false;
 
-        pszHaystack += (uint)nIndex + strTemp.length();
+        pszHaystack += (STRA_UINT)nIndex + strTemp.length();
       }
     }
     else if (*pszPattern == '?')
@@ -3613,6 +3458,3 @@ bool StringA::strMatch (const char* pszHaystack, const char* pszPattern, bool bC
 
   return true;
 }
-
-
-} // namespace glb
