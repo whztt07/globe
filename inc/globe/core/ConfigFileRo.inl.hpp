@@ -3,7 +3,7 @@
 // Globe
 // A small C++ library to allow fast prototyping of Direct3D animations.
 //
-// Copyright (C) 2012-2013 Jean-Charles Lefebvre <jcl [AT] jcl [DOT] io>
+// Copyright (C) 2012-2013 Jean-Charles Lefebvre <polyvertex@gmail.com>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -21,11 +21,7 @@
 //    be misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 //
-//
-// Author     : Jean-Charles Lefebvre
-// Created On : 2011-10-19 19:10:25
-//
-// $Id$
+// Created On: 2011-10-19 19:10:25
 //
 //***************************************************************************
 
